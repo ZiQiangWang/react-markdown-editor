@@ -12,7 +12,7 @@ import MarkdownPreview from '../components/MarkdownPreview';
 
 const Preivew = (props) => {
   return (
-    <div className="preview-container"  style={{ display: props.showMode === 2 ? 'none' : 'block' }}>
+    <div className={"preview-container " + (props.showMode === 2 ? "disappear":"")}>
       <PreivewNav />
       <MarkdownPreview 
         source={props.source}

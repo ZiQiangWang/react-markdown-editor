@@ -789,7 +789,7 @@ module.exports = ExecutionEnvironment;
 
 
 
-var _prodInvariant = __webpack_require__(18);
+var _prodInvariant = __webpack_require__(19);
 
 var ReactCurrentOwner = __webpack_require__(11);
 
@@ -1237,7 +1237,7 @@ module.exports = { debugTool: debugTool };
 "use strict";
 
 
-module.exports = __webpack_require__(17);
+module.exports = __webpack_require__(18);
 
 
 /***/ }),
@@ -1297,7 +1297,7 @@ var _prodInvariant = __webpack_require__(3),
 var CallbackQueue = __webpack_require__(68);
 var PooledClass = __webpack_require__(16);
 var ReactFeatureFlags = __webpack_require__(69);
-var ReactReconciler = __webpack_require__(19);
+var ReactReconciler = __webpack_require__(20);
 var Transaction = __webpack_require__(29);
 
 var invariant = __webpack_require__(1);
@@ -2487,6 +2487,43 @@ module.exports = PooledClass;
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+if (process.env.NODE_ENV !== 'production') {
+  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+    Symbol.for &&
+    Symbol.for('react.element')) ||
+    0xeac7;
+
+  var isValidElement = function(object) {
+    return typeof object === 'object' &&
+      object !== null &&
+      object.$$typeof === REACT_ELEMENT_TYPE;
+  };
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(61)(isValidElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = __webpack_require__(190)();
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright 2013-present, Facebook, Inc.
@@ -2622,7 +2659,7 @@ module.exports = React;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2666,7 +2703,7 @@ function reactProdInvariant(code) {
 module.exports = reactProdInvariant;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2838,7 +2875,7 @@ module.exports = ReactReconciler;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2959,43 +2996,6 @@ DOMLazyTree.queueHTML = queueHTML;
 DOMLazyTree.queueText = queueText;
 
 module.exports = DOMLazyTree;
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
-if (process.env.NODE_ENV !== 'production') {
-  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
-    Symbol.for &&
-    Symbol.for('react.element')) ||
-    0xeac7;
-
-  var isValidElement = function(object) {
-    return typeof object === 'object' &&
-      object !== null &&
-      object.$$typeof === REACT_ELEMENT_TYPE;
-  };
-
-  // By explicitly using `prop-types` you are opting into new development behavior.
-  // http://fb.me/prop-types-in-prod
-  var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(61)(isValidElement, throwOnDirectAccess);
-} else {
-  // By explicitly using `prop-types` you are opting into new production behavior.
-  // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(191)();
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 22 */
@@ -14803,7 +14803,7 @@ module.exports = getEventModifierState;
 
 
 
-var DOMLazyTree = __webpack_require__(20);
+var DOMLazyTree = __webpack_require__(21);
 var Danger = __webpack_require__(123);
 var ReactDOMComponentTree = __webpack_require__(5);
 var ReactInstrumentation = __webpack_require__(9);
@@ -15102,7 +15102,7 @@ var _prodInvariant = __webpack_require__(3);
 var ReactPropTypesSecret = __webpack_require__(77);
 var propTypesFactory = __webpack_require__(60);
 
-var React = __webpack_require__(17);
+var React = __webpack_require__(18);
 var PropTypes = propTypesFactory(React.isValidElement);
 
 var invariant = __webpack_require__(1);
@@ -16145,7 +16145,7 @@ var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(21);
+var _propTypes = __webpack_require__(17);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -16159,23 +16159,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 
 var IconBtn = function IconBtn(props) {
+  var config = props.config;
 
   return _react2.default.createElement(
     'a',
-    { className: "btn-icon " + props.iconTheme, onClick: props.onClick, title: props.tips },
-    _react2.default.createElement('span', { className: props.className })
+    { className: "btn-icon " + (config.iconTheme || "default"), onClick: props.onClick, title: config.tips },
+    _react2.default.createElement('span', { className: config.icon }),
+    config.text
   );
 };
 
-IconBtn.defaultProps = {
-  iconTheme: 'default'
-};
-
 IconBtn.propTypes = {
-  iconTheme: _propTypes2.default.string,
   onClick: _propTypes2.default.func,
-  tips: _propTypes2.default.string,
-  className: _propTypes2.default.string
+  config: _propTypes2.default.shape({
+    icon: _propTypes2.default.string,
+    iconTheme: _propTypes2.default.string,
+    tips: _propTypes2.default.string,
+    text: _propTypes2.default.string
+  })
 };
 
 exports.default = IconBtn;
@@ -16224,7 +16225,7 @@ module.exports = g;
 
 
 
-var _prodInvariant = __webpack_require__(18),
+var _prodInvariant = __webpack_require__(19),
     _assign = __webpack_require__(4);
 
 var ReactNoopUpdateQueue = __webpack_require__(56);
@@ -19626,7 +19627,7 @@ module.exports = instantiateReactComponent;
 
 var _prodInvariant = __webpack_require__(3);
 
-var React = __webpack_require__(17);
+var React = __webpack_require__(18);
 
 var invariant = __webpack_require__(1);
 
@@ -20224,9 +20225,9 @@ module.exports = getActiveElement;
 
 var _prodInvariant = __webpack_require__(3);
 
-var DOMLazyTree = __webpack_require__(20);
+var DOMLazyTree = __webpack_require__(21);
 var DOMProperty = __webpack_require__(14);
-var React = __webpack_require__(17);
+var React = __webpack_require__(18);
 var ReactBrowserEventEmitter = __webpack_require__(33);
 var ReactCurrentOwner = __webpack_require__(11);
 var ReactDOMComponentTree = __webpack_require__(5);
@@ -20236,7 +20237,7 @@ var ReactFeatureFlags = __webpack_require__(69);
 var ReactInstanceMap = __webpack_require__(25);
 var ReactInstrumentation = __webpack_require__(9);
 var ReactMarkupChecksum = __webpack_require__(181);
-var ReactReconciler = __webpack_require__(19);
+var ReactReconciler = __webpack_require__(20);
 var ReactUpdateQueue = __webpack_require__(50);
 var ReactUpdates = __webpack_require__(12);
 
@@ -20807,17 +20808,35 @@ var _MarkdownEditor = __webpack_require__(189);
 
 var _MarkdownEditor2 = _interopRequireDefault(_MarkdownEditor);
 
-__webpack_require__(387);
-
-__webpack_require__(388);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _reactDom.render)(_react2.default.createElement(_MarkdownEditor2.default, null), document.getElementById('root')); /**
-                                                                                                                        * @authors ZiQiangWang
-                                                                                                                        * @email   814120507@qq.com
-                                                                                                                        * @date    2017-07-06 18:09:09
-                                                                                                                        */
+// {
+//     name: PropTypes.string,
+//     defaultValue: PropTypes.string,
+//     codemirrorOptions: PropTypes.object,
+//     onChange: PropTypes.func,
+//     onCursorActivity: PropTypes.func,
+//     onFocusChange: PropTypes.func,
+//     onScroll: PropTypes.func,
+
+//     height:12,
+// markBtns
+// registMarkBtns
+//     markedOptions:{
+
+//     }
+// }
+(0, _reactDom.render)(_react2.default.createElement(_MarkdownEditor2.default, {
+  height: '350px',
+  markedOptions: { tables: true },
+  codemirrorOptions: { lineNumbers: false },
+  value: '12',
+  defaultValue: '# 123'
+}), document.getElementById('root')); /**
+                                       * @authors ZiQiangWang
+                                       * @email   814120507@qq.com
+                                       * @date    2017-07-06 18:09:09
+                                       */
 
 /***/ }),
 /* 91 */
@@ -21033,7 +21052,7 @@ module.exports = ReactChildren;
 
 
 
-var _prodInvariant = __webpack_require__(18);
+var _prodInvariant = __webpack_require__(19);
 
 var invariant = __webpack_require__(1);
 
@@ -21150,7 +21169,7 @@ module.exports = PooledClass;
 
 
 
-var _prodInvariant = __webpack_require__(18);
+var _prodInvariant = __webpack_require__(19);
 
 var ReactCurrentOwner = __webpack_require__(11);
 var REACT_ELEMENT_TYPE = __webpack_require__(57);
@@ -21571,7 +21590,7 @@ module.exports = ReactDOMFactories;
 
 
 
-var _prodInvariant = __webpack_require__(18);
+var _prodInvariant = __webpack_require__(19);
 
 var ReactPropTypeLocationNames = __webpack_require__(97);
 var ReactPropTypesSecret = __webpack_require__(98);
@@ -21856,7 +21875,7 @@ module.exports = factory(Component, isValidElement, ReactNoopUpdateQueue);
  */
 
 
-var _prodInvariant = __webpack_require__(18);
+var _prodInvariant = __webpack_require__(19);
 
 var ReactElement = __webpack_require__(15);
 
@@ -21906,7 +21925,7 @@ module.exports = onlyChild;
 var ReactDOMComponentTree = __webpack_require__(5);
 var ReactDefaultInjection = __webpack_require__(105);
 var ReactMount = __webpack_require__(87);
-var ReactReconciler = __webpack_require__(19);
+var ReactReconciler = __webpack_require__(20);
 var ReactUpdates = __webpack_require__(12);
 var ReactVersion = __webpack_require__(183);
 
@@ -24196,7 +24215,7 @@ module.exports = ReactComponentBrowserEnvironment;
 
 var _prodInvariant = __webpack_require__(3);
 
-var DOMLazyTree = __webpack_require__(20);
+var DOMLazyTree = __webpack_require__(21);
 var ExecutionEnvironment = __webpack_require__(6);
 
 var createNodesFromMarkup = __webpack_require__(124);
@@ -24615,7 +24634,7 @@ var _prodInvariant = __webpack_require__(3),
 
 var AutoFocusUtils = __webpack_require__(129);
 var CSSPropertyOperations = __webpack_require__(130);
-var DOMLazyTree = __webpack_require__(20);
+var DOMLazyTree = __webpack_require__(21);
 var DOMNamespaces = __webpack_require__(43);
 var DOMProperty = __webpack_require__(14);
 var DOMPropertyOperations = __webpack_require__(76);
@@ -26627,7 +26646,7 @@ module.exports = ReactDOMInput;
 
 var _assign = __webpack_require__(4);
 
-var React = __webpack_require__(17);
+var React = __webpack_require__(18);
 var ReactDOMComponentTree = __webpack_require__(5);
 var ReactDOMSelect = __webpack_require__(78);
 
@@ -26926,7 +26945,7 @@ var ReactInstanceMap = __webpack_require__(25);
 var ReactInstrumentation = __webpack_require__(9);
 
 var ReactCurrentOwner = __webpack_require__(11);
-var ReactReconciler = __webpack_require__(19);
+var ReactReconciler = __webpack_require__(20);
 var ReactChildReconciler = __webpack_require__(144);
 
 var emptyFunction = __webpack_require__(8);
@@ -27371,7 +27390,7 @@ module.exports = ReactMultiChild;
 
 
 
-var ReactReconciler = __webpack_require__(19);
+var ReactReconciler = __webpack_require__(20);
 
 var instantiateReactComponent = __webpack_require__(79);
 var KeyEscapeUtils = __webpack_require__(49);
@@ -27533,14 +27552,14 @@ module.exports = ReactChildReconciler;
 var _prodInvariant = __webpack_require__(3),
     _assign = __webpack_require__(4);
 
-var React = __webpack_require__(17);
+var React = __webpack_require__(18);
 var ReactComponentEnvironment = __webpack_require__(46);
 var ReactCurrentOwner = __webpack_require__(11);
 var ReactErrorUtils = __webpack_require__(38);
 var ReactInstanceMap = __webpack_require__(25);
 var ReactInstrumentation = __webpack_require__(9);
 var ReactNodeTypes = __webpack_require__(80);
-var ReactReconciler = __webpack_require__(19);
+var ReactReconciler = __webpack_require__(20);
 
 if (process.env.NODE_ENV !== 'production') {
   var checkReactTypeSpec = __webpack_require__(146);
@@ -28982,7 +29001,7 @@ module.exports = ReactServerUpdateQueue;
 
 var _assign = __webpack_require__(4);
 
-var DOMLazyTree = __webpack_require__(20);
+var DOMLazyTree = __webpack_require__(21);
 var ReactDOMComponentTree = __webpack_require__(5);
 
 var ReactDOMEmptyComponent = function (instantiate) {
@@ -29191,7 +29210,7 @@ var _prodInvariant = __webpack_require__(3),
     _assign = __webpack_require__(4);
 
 var DOMChildrenOperations = __webpack_require__(42);
-var DOMLazyTree = __webpack_require__(20);
+var DOMLazyTree = __webpack_require__(21);
 var ReactDOMComponentTree = __webpack_require__(5);
 
 var escapeTextContentForBrowser = __webpack_require__(32);
@@ -32054,7 +32073,11 @@ var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Toolbar = __webpack_require__(190);
+var _propTypes = __webpack_require__(17);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _Toolbar = __webpack_require__(191);
 
 var _Toolbar2 = _interopRequireDefault(_Toolbar);
 
@@ -32068,7 +32091,11 @@ var _Preview2 = _interopRequireDefault(_Preview);
 
 var _fullscreen = __webpack_require__(386);
 
+__webpack_require__(387);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -32091,10 +32118,16 @@ var MarkdownEditor = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (MarkdownEditor.__proto__ || Object.getPrototypeOf(MarkdownEditor)).call(this, props));
 
+    _this.getMarkdownSrc = function () {
+      return _this.state.markdownSrc;
+    };
+
     _this.onMarkdownChange = function (md) {
       _this.setState(_extends({}, _this.state, {
         markdownSrc: md
       }));
+
+      _this.props.onChange(md);
     };
 
     _this.handleFullscreen = function () {
@@ -32125,8 +32158,7 @@ var MarkdownEditor = function (_React$Component) {
     };
 
     _this.state = {
-      markdownSrc: '',
-      codemirror: undefined,
+      markdownSrc: _this.props.defaultValue,
       toolState: {
         showMode: 0,
         fullscreen: false,
@@ -32138,25 +32170,38 @@ var MarkdownEditor = function (_React$Component) {
     return _this;
   }
 
+  // 响应工具栏按钮，包括显示模式，全屏，左右顺序
+
+
   _createClass(MarkdownEditor, [{
     key: 'render',
     value: function render() {
+      var _props = this.props,
+          codemirrorOptions = _props.codemirrorOptions,
+          height = _props.height,
+          markedOptions = _props.markedOptions,
+          value = _props.value,
+          onChange = _props.onChange,
+          mirrorConfig = _objectWithoutProperties(_props, ['codemirrorOptions', 'height', 'markedOptions', 'value', 'onChange']);
 
       return _react2.default.createElement(
         'div',
-        { className: 'wrap article-editor', style: { flexDirection: this.state.toolState.order ? 'row-reverse' : 'row' } },
+        { className: 'markdown-editor', style: { flexDirection: this.state.toolState.order ? 'row-reverse' : 'row', height: height } },
         _react2.default.createElement(_Toolbar2.default, {
+          className: this.props.tool,
           onClick: this.onChangeToolState,
           toolState: this.state.toolState
         }),
-        _react2.default.createElement(_Editor2.default, {
+        _react2.default.createElement(_Editor2.default, _extends({
           showMode: this.state.toolState.showMode,
           value: this.state.markdownSrc,
-          onChange: this.onMarkdownChange
-        }),
+          onChange: this.onMarkdownChange,
+          options: codemirrorOptions
+        }, mirrorConfig)),
         _react2.default.createElement(_Preview2.default, {
           showMode: this.state.toolState.showMode,
-          source: this.state.markdownSrc
+          source: this.state.markdownSrc,
+          options: markedOptions
         })
       );
     }
@@ -32165,81 +32210,20 @@ var MarkdownEditor = function (_React$Component) {
   return MarkdownEditor;
 }(_react2.default.Component);
 
+MarkdownEditor.defaultProps = {
+  height: '400px'
+};
+
+MarkdownEditor.propTypes = {
+  height: _propTypes2.default.string,
+  editorOptions: _propTypes2.default.object,
+  markedOptions: _propTypes2.default.object
+};
+
 exports.default = MarkdownEditor;
 
 /***/ }),
 /* 190 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(10);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(21);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-__webpack_require__(89);
-
-var _IconBtn = __webpack_require__(53);
-
-var _IconBtn2 = _interopRequireDefault(_IconBtn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * 工具栏，用于对界面进行一些操作
- * @authors ZiQiangWang
- * @email   814120507@qq.com
- * @date    2017-07-14 16:45:58
- */
-
-var Toolbar = function Toolbar(props) {
-  return _react2.default.createElement(
-    'div',
-    { className: 'toolbar' },
-    btnList.map(function (ele, index) {
-      return _react2.default.createElement(_IconBtn2.default, {
-        key: index,
-        className: ele.icon,
-        tips: ele.tips,
-        iconTheme: 'bluegray',
-        onClick: function onClick() {
-          return props.onClick(ele.name);
-        }
-      });
-    })
-  );
-};
-
-Toolbar.propTypes = {
-  onClick: _propTypes2.default.func.isRequired
-};
-
-var btnList = [{
-  name: 'showMode',
-  icon: 'icon-display',
-  tips: '切换阅读模式和编辑模式'
-}, {
-  name: 'fullscreen',
-  icon: 'icon-enlarge',
-  tips: '全屏模式'
-}, {
-  name: 'order',
-  icon: 'icon-tab',
-  tips: '交换左右视图'
-}];
-exports.default = Toolbar;
-
-/***/ }),
-/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32305,6 +32289,78 @@ module.exports = function() {
 
 
 /***/ }),
+/* 191 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(10);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(17);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+__webpack_require__(89);
+
+var _IconBtn = __webpack_require__(53);
+
+var _IconBtn2 = _interopRequireDefault(_IconBtn);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * 工具栏，用于对界面进行一些操作
+ * @authors ZiQiangWang
+ * @email   814120507@qq.com
+ * @date    2017-07-14 16:45:58
+ */
+
+var Toolbar = function Toolbar(props) {
+  return _react2.default.createElement(
+    'div',
+    { className: 'toolbar' },
+    btnList.map(function (ele, index) {
+      return _react2.default.createElement(_IconBtn2.default, {
+        key: index,
+        config: ele,
+        onClick: function onClick() {
+          return props.onClick(ele.name);
+        }
+      });
+    })
+  );
+};
+
+Toolbar.propTypes = {
+  onClick: _propTypes2.default.func.isRequired
+};
+
+var btnList = [{
+  name: 'showMode',
+  icon: 'icon-display',
+  tips: '切换阅读模式和编辑模式',
+  iconTheme: 'bluegray'
+}, {
+  name: 'fullscreen',
+  icon: 'icon-enlarge',
+  tips: '全屏模式',
+  iconTheme: 'bluegray'
+}, {
+  name: 'order',
+  icon: 'icon-tab',
+  tips: '交换左右视图',
+  iconTheme: 'bluegray'
+}];
+exports.default = Toolbar;
+
+/***/ }),
 /* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32323,7 +32379,7 @@ var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(21);
+var _propTypes = __webpack_require__(17);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -32340,6 +32396,10 @@ var _IconBtn = __webpack_require__(53);
 var _IconBtn2 = _interopRequireDefault(_IconBtn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -32360,16 +32420,33 @@ var Editor = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Editor.__proto__ || Object.getPrototypeOf(Editor)).call(this, props));
 
-    _this.onInputChange = function (newValue) {
-      _this.props.onChange(newValue);
+    _this.selectedMarkdownBtns = function () {
+
+      var btns = _this.props.markBtns;
+
+      if (btns === undefined) {
+        return;
+      }
+
+      if (btns[0] === '*') {
+        _this.markdownBtns = [].concat(_toConsumableArray(_this.markdownBtns), _toConsumableArray(btns.slice(1)));
+      } else {
+        _this.markdownBtns = btns;
+      }
+    };
+
+    _this.registMarkdownBtn = function () {
+      if (_this.props.registMarkBtns) {
+        Object.assign(_this.markdownMap, _this.props.registMarkBtns);
+      }
     };
 
     _this.onQuickMarkdown = function (type) {
 
       // 获取codemirror实例
-      var mirror = _this.state.codemirror;
+      var mirror = _this.codemirror;
 
-      var config = markdownMap[type];
+      var config = _this.markdownMap[type];
 
       // 获取选中的内容，以及对应的位置，
       // 如果未选中，则selection为空，开始和结束位置为光标所在位置
@@ -32398,15 +32475,92 @@ var Editor = function (_Component) {
       mirror.focus();
     };
 
-    _this.onInputChange = _this.onInputChange.bind(_this);
+    _this.codemirror = undefined;
 
-    _this.state = {
-      codemirror: undefined
+    _this.markdownBtns = ['heading', 'bold', 'italic', 'underline', 'strikethrough', 'blockquote', 'code', 'list-ol', 'list-ul', 'link', 'table', 'line', 'picture'];
+
+    _this.markdownMap = {
+      heading: {
+        mark: '# ',
+        type: 'insert',
+        icon: 'icon-font-size',
+        iconTheme: '',
+        tips: ''
+      },
+      bold: {
+        mark: ['**', '**'],
+        type: 'around',
+        icon: 'icon-bold',
+        tips: '粗体'
+      },
+      italic: {
+        mark: ['*', '*'],
+        type: 'around',
+        icon: 'icon-italic',
+        tips: '斜体'
+      },
+      underline: {
+        mark: ['<u>', '</u>'],
+        type: 'around',
+        icon: 'icon-underline'
+      },
+      strikethrough: {
+        mark: ['~~', '~~'],
+        type: 'around',
+        icon: 'icon-strikethrough'
+      },
+      blockquote: {
+        mark: '> ',
+        type: 'insert',
+        icon: 'icon-quotes-left'
+      },
+      code: {
+        mark: ['```js\n', '\n```'],
+        type: 'around',
+        icon: 'icon-embed2'
+      },
+      'list-ol': {
+        mark: '1. ',
+        type: 'insert',
+        icon: 'icon-list-numbered'
+      },
+      'list-ul': {
+        mark: '* ',
+        type: 'insert',
+        icon: 'icon-list2'
+      },
+      link: {
+        mark: ['[', ']()'],
+        type: 'around',
+        icon: 'icon-link'
+      },
+      table: {
+        mark: '\ncolumn1 | column2 | column3  \n------- | ------- | -------  \ncolumn1 | column2 | column3  \ncolumn1 | column2 | column3  \ncolumn1 | column2 | column3 \n',
+        type: 'insert',
+        icon: 'icon-table2'
+      },
+      line: {
+        mark: '\n----\n',
+        type: 'insert',
+        icon: 'icon-minus'
+      },
+      picture: {
+        mark: ['![', ']()'],
+        type: 'around',
+        icon: 'icon-image'
+      }
     };
+
+    _this.registMarkdownBtn();
+
+    _this.selectedMarkdownBtns();
     return _this;
   }
 
-  // 响应内容变化
+  // 选择显示哪些按钮
+
+
+  // 自定义新的快速markdown按钮
 
 
   // 响应使用按钮插入markdown语法的需求，主要调用codemirror的函数进行
@@ -32416,39 +32570,37 @@ var Editor = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       // 在加载完成时获取codemirror实例
-      this.setState(_extends({}, this.state, {
-        codemirror: this.refs.mirror.getCodeMirror()
-      }));
+      this.codemirror = this.refs.mirror.getCodeMirror();
     }
   }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
-      var options = {
-        mode: 'markdown',
-        lineWrapping: true,
-        autofocus: true
-      };
+      var _props = this.props,
+          markBtns = _props.markBtns,
+          registMarkBtns = _props.registMarkBtns,
+          options = _props.options,
+          showMode = _props.showMode,
+          mirrorProps = _objectWithoutProperties(_props, ['markBtns', 'registMarkBtns', 'options', 'showMode']);
 
+      var mirrorOptions = _extends({}, options, defaultOptions);
       return _react2.default.createElement(
         'div',
-        { className: 'editor-container', style: { display: this.props.showMode === 1 ? 'none' : 'block' } },
+        { className: 'editor-container', style: { display: showMode === 1 ? 'none' : 'block' } },
         _react2.default.createElement(
           'div',
           { className: 'markdown-bar' },
-          this.props.markBtn.map(function (ele, index) {
-            return _react2.default.createElement(_IconBtn2.default, { key: index, className: markdownMap[ele].icon, onClick: function onClick() {
+          this.markdownBtns.map(function (ele, index) {
+            return _react2.default.createElement(_IconBtn2.default, { key: index, config: _this2.markdownMap[ele], onClick: function onClick() {
                 return _this2.onQuickMarkdown(ele);
               } });
           })
         ),
-        _react2.default.createElement(_reactCodemirror2.default, {
+        _react2.default.createElement(_reactCodemirror2.default, _extends({
           ref: 'mirror',
-          value: this.props.value,
-          onChange: this.onInputChange,
-          options: options
-        })
+          options: mirrorOptions
+        }, mirrorProps))
       );
     }
   }]);
@@ -32456,81 +32608,22 @@ var Editor = function (_Component) {
   return Editor;
 }(_react.Component);
 
-Editor.defaultProps = {
-  markBtn: ['heading', 'bold', 'italic', 'underline', 'strikethrough', 'blockquote', 'code', 'list-ol', 'list-ul', 'link', 'table', 'line', 'picture']
+var defaultOptions = {
+  mode: 'markdown',
+  lineWrapping: true,
+  autofocus: true
 };
+
 Editor.propTypes = {
-  value: _propTypes2.default.string,
-  onChange: _propTypes2.default.func.isRequired
-};
-
-
-var markdownMap = {
-  heading: {
-    mark: '# ',
-    type: 'insert',
-    icon: 'icon-font-size'
-  },
-  bold: {
-    mark: ['**', '**'],
-    type: 'around',
-    icon: 'icon-bold'
-  },
-  italic: {
-    mark: ['*', '*'],
-    type: 'around',
-    icon: 'icon-italic'
-  },
-  underline: {
-    mark: ['<u>', '</u>'],
-    type: 'around',
-    icon: 'icon-underline'
-  },
-  strikethrough: {
-    mark: ['~~', '~~'],
-    type: 'around',
-    icon: 'icon-strikethrough'
-  },
-  blockquote: {
-    mark: '> ',
-    type: 'insert',
-    icon: 'icon-quotes-left'
-  },
-  code: {
-    mark: ['```js\n', '\n```'],
-    type: 'around',
-    icon: 'icon-embed2'
-  },
-  'list-ol': {
-    mark: '1. ',
-    type: 'insert',
-    icon: 'icon-list-numbered'
-  },
-  'list-ul': {
-    mark: '* ',
-    type: 'insert',
-    icon: 'icon-list2'
-  },
-  'link': {
-    mark: ['[', ']()'],
-    type: 'around',
-    icon: 'icon-link'
-  },
-  'table': {
-    mark: '\ncolumn1 | column2 | column3  \n------- | ------- | -------  \ncolumn1 | column2 | column3  \ncolumn1 | column2 | column3  \ncolumn1 | column2 | column3 \n',
-    type: 'insert',
-    icon: 'icon-table2'
-  },
-  line: {
-    mark: '\n----\n',
-    type: 'insert',
-    icon: 'icon-minus'
-  },
-  picture: {
-    mark: ['![', ']()'],
-    type: 'around',
-    icon: 'icon-image'
-  }
+  markBtns: _propTypes2.default.array,
+  registMarkBtns: _propTypes2.default.objectOf(_propTypes2.default.shape({
+    mark: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array]).isRequired,
+    type: _propTypes2.default.oneOf(['around', 'insert']).isRequired,
+    icon: _propTypes2.default.string.isRequired,
+    iconTheme: _propTypes2.default.string,
+    tips: _propTypes2.default.string,
+    text: _propTypes2.default.string
+  }))
 };
 
 exports.default = Editor;
@@ -32544,7 +32637,7 @@ exports.default = Editor;
 
 var React = __webpack_require__(10);
 var ReactDOM = __webpack_require__(63);
-var PropTypes = __webpack_require__(21);
+var PropTypes = __webpack_require__(17);
 var className = __webpack_require__(194);
 var debounce = __webpack_require__(195);
 var isEqual = __webpack_require__(196);
@@ -36482,7 +36575,7 @@ var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(21);
+var _propTypes = __webpack_require__(17);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -36509,14 +36602,15 @@ var Preivew = function Preivew(props) {
     _react2.default.createElement(_PreivewNav2.default, null),
     _react2.default.createElement(_MarkdownPreview2.default, {
       source: props.source,
-      options: { breaks: true }
+      options: props.options
     })
   );
 };
 
 Preivew.propTypes = {
   showMode: _propTypes2.default.number.isRequired,
-  source: _propTypes2.default.string.isRequired
+  source: _propTypes2.default.string.isRequired,
+  options: _propTypes2.default.object
 };
 
 exports.default = Preivew;
@@ -36574,7 +36668,7 @@ var PreivewNav = function (_Component) {
         'div',
         { className: 'preview-toolbar' },
         btnList.map(function (ele, index) {
-          return _react2.default.createElement(_IconBtn2.default, { key: index, className: ele.icon, tips: ele.tips });
+          return _react2.default.createElement(_IconBtn2.default, { key: index, config: ele });
         })
       );
     }
@@ -36609,15 +36703,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(21);
+var _propTypes = __webpack_require__(17);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -36684,13 +36776,7 @@ var MarkdownPreview = function (_Component) {
       document.getElementById("markdown-preview").innerHTML = html;
     };
 
-    var options = _extends({}, _this.props.options, {
-      highlight: function highlight(code) {
-        return _highlight2.default.highlightAuto(code).value;
-      }
-    });
-
-    _marked2.default.setOptions(options);
+    _marked2.default.setOptions(_this.props.options);
     return _this;
   }
 
@@ -36715,12 +36801,22 @@ var MarkdownPreview = function (_Component) {
 }(_react.Component);
 
 MarkdownPreview.defaultProps = {
-  options: {}
+  options: { breaks: true }
 };
+
 MarkdownPreview.propTypes = {
   source: _propTypes2.default.string.isRequired,
-  options: _propTypes2.default.object
+  options: _propTypes2.default.shape({
+    gfm: _propTypes2.default.bool,
+    tables: _propTypes2.default.bool,
+    breaks: _propTypes2.default.bool,
+    pedantic: _propTypes2.default.bool,
+    sanitize: _propTypes2.default.bool,
+    smartLists: _propTypes2.default.bool,
+    smartypants: _propTypes2.default.bool
+  })
 };
+
 exports.default = MarkdownPreview;
 
 /***/ }),
@@ -55614,12 +55710,6 @@ var checkFull = exports.checkFull = function checkFull() {
 
 /***/ }),
 /* 387 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 388 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

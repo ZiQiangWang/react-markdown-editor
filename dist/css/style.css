@@ -10,7 +10,6 @@
  */
 .btn-icon {
   color: white;
-  font-size: .75em;
   cursor: pointer;
   width: auto;
   white-space: nowrap;
@@ -33,154 +32,104 @@
 .bluegray:hover {
   color: rgba(0, 0, 0, 0.45);
 }
-/**
- * @authors ZiQiangWang (814120507@qq.com)
- * @date    2017-07-12 17:19:14
- */
-/**  
- * @authors ZiQiangWang (814120507@qq.com)
- * @date    2017-07-06 21:44:36
- * @version $Id$
- */
-.article-editor {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  height: 100%;
+/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8;
 }
-@media screen and (min-width: 801px) {
-  .article-editor .preview-container,
-  .article-editor .editor-container {
-    width: 100%;
-  }
+
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
 }
-@media screen and (max-width: 800px) {
-  .article-editor .preview-container {
-    width: 0% !important;
-  }
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #333;
+  font-weight: bold;
 }
-.article-editor .toolbar {
-  position: fixed;
-  right: 0;
-  bottom: 2%;
-  z-index: 1000;
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
 }
-.article-editor .preview-container {
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
-  position: relative;
-  -webkit-transition: display .5s;
-  transition: display .5s;
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
 }
-.article-editor .preview-container .preview-toolbar {
-  height: 48px;
-  z-index: 50;
-  line-height: 48px;
-  overflow: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  padding: 0 20px;
-  background-color: #444;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
+  font-weight: bold;
 }
-.article-editor .preview-container .preview {
-  position: absolute;
-  top: 48px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  line-height: 1.5em;
-  color: #444;
-  padding: 10px 20px;
-  border-left: thin solid lightgray;
-  border-right: thin solid lightgray;
-  font-size: 16px;
-  font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+
+.hljs-subst {
+  font-weight: normal;
 }
-.article-editor .preview-container .preview blockquote {
-  color: #666;
-  margin: 1em 0;
-  padding: 5px 10px;
-  border-left: 10px #D6DBDF solid;
-  background-color: rgba(102, 128, 153, 0.05);
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
 }
-.article-editor .preview-container .preview blockquote h1,
-.article-editor .preview-container .preview blockquote h2,
-.article-editor .preview-container .preview blockquote h3,
-.article-editor .preview-container .preview blockquote h4,
-.article-editor .preview-container .preview blockquote h5,
-.article-editor .preview-container .preview blockquote h6,
-.article-editor .preview-container .preview blockquote p,
-.article-editor .preview-container .preview blockquote span {
-  margin: 4px;
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
 }
-.article-editor .preview-container .preview pre {
-  margin: 1em 0;
-  background-color: rgba(102, 128, 153, 0.05);
-  -webkit-box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1) inset, 45px 0 0 rgba(102, 128, 153, 0.05) inset, 0 1px 0 rgba(102, 128, 153, 0.05);
-          box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1) inset, 45px 0 0 rgba(102, 128, 153, 0.05) inset, 0 1px 0 rgba(102, 128, 153, 0.05);
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
 }
-.article-editor .preview-container .preview pre > ol {
-  margin-left: 5px;
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
 }
-.article-editor .preview-container .preview pre > ol > li {
-  padding-left: 10px;
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
 }
-.article-editor .preview-container .preview table {
-  margin: 1em 0;
-  width: 100%;
-  border-collapse: collapse;
-  border-spacing: 0;
+
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
 }
-.article-editor .preview-container .preview table thead > tr > th,
-.article-editor .preview-container .preview table tbody > tr > td {
-  padding: 8px;
-  border: 1px solid #ddd;
+
+.hljs-deletion {
+  background: #fdd;
 }
-.article-editor .preview-container .preview table tbody > tr:nth-child(even) {
-  background-color: rgba(181, 181, 181, 0.1);
+
+.hljs-addition {
+  background: #dfd;
 }
-.article-editor .editor-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  -webkit-transition: display .5s;
-  transition: display .5s;
+
+.hljs-emphasis {
+  font-style: italic;
 }
-.article-editor .editor-container .markdown-bar {
-  height: 48px;
-  line-height: 48px;
-  z-index: 50;
-  overflow: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  padding: 0 20px;
-  background-color: #444;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  position: relative;
-}
-.article-editor .editor-container .ReactCodeMirror {
-  position: absolute;
-  top: 48px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-.article-editor .editor-container .ReactCodeMirror .CodeMirror {
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-  font-size: 16px;
-  font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+
+.hljs-strong {
+  font-weight: bold;
 }
 /* BASICS */
 
@@ -517,105 +466,6 @@ div.CodeMirror-dragcursors {
 
 /* Help users use markselection to safely style text background */
 span.CodeMirror-selectedtext { background: none; }
-/*
-
-github.com style (c) Vasily Polovnyov <vast@whiteants.net>
-
-*/
-
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  color: #333;
-  background: #f8f8f8;
-}
-
-.hljs-comment,
-.hljs-quote {
-  color: #998;
-  font-style: italic;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-subst {
-  color: #333;
-  font-weight: bold;
-}
-
-.hljs-number,
-.hljs-literal,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-tag .hljs-attr {
-  color: #008080;
-}
-
-.hljs-string,
-.hljs-doctag {
-  color: #d14;
-}
-
-.hljs-title,
-.hljs-section,
-.hljs-selector-id {
-  color: #900;
-  font-weight: bold;
-}
-
-.hljs-subst {
-  font-weight: normal;
-}
-
-.hljs-type,
-.hljs-class .hljs-title {
-  color: #458;
-  font-weight: bold;
-}
-
-.hljs-tag,
-.hljs-name,
-.hljs-attribute {
-  color: #000080;
-  font-weight: normal;
-}
-
-.hljs-regexp,
-.hljs-link {
-  color: #009926;
-}
-
-.hljs-symbol,
-.hljs-bullet {
-  color: #990073;
-}
-
-.hljs-built_in,
-.hljs-builtin-name {
-  color: #0086b3;
-}
-
-.hljs-meta {
-  color: #999;
-  font-weight: bold;
-}
-
-.hljs-deletion {
-  background: #fdd;
-}
-
-.hljs-addition {
-  background: #dfd;
-}
-
-.hljs-emphasis {
-  font-style: italic;
-}
-
-.hljs-strong {
-  font-weight: bold;
-}
 /**
  * 
  * @authors ZiQiangWang (814120507@qq.com)
@@ -720,103 +570,165 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 /**
  * @authors ZiQiangWang (814120507@qq.com)
- * @date    2017-07-06 22:05:00
+ * @date    2017-07-12 17:19:14
+ */
+/**  
+ * @authors ZiQiangWang (814120507@qq.com)
+ * @date    2017-07-06 21:44:36
  * @version $Id$
  */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-}
-html {
+.markdown-editor {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-size: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  line-height: 1.5;
 }
-*,
-*:before,
-*:after {
+.markdown-editor *,
+.markdown-editor *:before,
+.markdown-editor *:after {
   -webkit-box-sizing: inherit;
           box-sizing: inherit;
 }
-body {
-  font-size: 20px;
-  line-height: 1.5;
-}
-[data-reactroot] {
-  width: 100%;
-  height: 100%;
-}
-#root {
-  width: 100%;
-  height: 100%;
-}
-img {
-  border: none;
-}
-a {
-  text-decoration: none;
-}
-input {
-  vertical-align: middle;
-}
-.clear {
-  clear: both;
-  height: 0;
-  overflow: hidden;
-}
-.clearfix:after {
-  content: ".";
-  clear: both;
-  height: 0;
-  overflow: hidden;
-  visibility: hidden;
-  display: block;
-}
-.clearfix {
-  zoom: 1;
-}
-body ::-moz-selection {
-  background-color: rgba(212, 74, 108, 0.15);
-}
-body ::selection {
-  background-color: rgba(212, 74, 108, 0.15);
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span {
+.markdown-editor h1,
+.markdown-editor h2,
+.markdown-editor h3,
+.markdown-editor h4,
+.markdown-editor h5,
+.markdown-editor h6,
+.markdown-editor p,
+.markdown-editor span {
   font-family: "Segoe UI", Arial, Helvetica, "Microsoft Jhenghei", "Hiragino Sans GB", "WenQuanYi Zen Hei", "Microsoft Yahei", SimHei, STHeiti, "WenQuanYi Micro Hei", sans-serif;
 }
-h1 {
-  font-size: 2em;
-  margin: .67em 0;
+@media screen and (min-width: 801px) {
+  .markdown-editor .preview-container,
+  .markdown-editor .editor-container {
+    width: 100%;
+  }
 }
-body,
-input,
-textarea {
-  color: #69606b;
-  background-color: white;
+@media screen and (max-width: 800px) {
+  .markdown-editor .preview-container {
+    width: 0% !important;
+  }
+  .markdown-editor .editor-container {
+    width: 100% ;
+  }
 }
-.wrap {
+.markdown-editor .toolbar {
+  position: fixed;
+  right: 0;
+  bottom: 2%;
+  z-index: 1000;
+}
+.markdown-editor .preview-container {
+  overflow: hidden;
+  position: relative;
+}
+.markdown-editor .preview-container .preview-toolbar {
+  height: 48px;
   width: 100%;
+  z-index: 50;
+  line-height: 48px;
+  overflow: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 0 20px;
+  background-color: #444;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+.markdown-editor .preview-container .preview {
+  overflow-y: auto;
+  line-height: 1.5em;
+  height: 100%;
+  color: #444;
+  padding: 58px 20px 10px 20px;
+  border-left: thin solid lightgray;
+  border-right: thin solid lightgray;
+  border-bottom: thin solid lightgray;
+}
+.markdown-editor .preview-container .preview blockquote {
+  color: #666;
+  margin: 1em 0;
+  padding: 5px 10px;
+  border-left: 10px #D6DBDF solid;
+  background-color: rgba(102, 128, 153, 0.05);
+}
+.markdown-editor .preview-container .preview blockquote h1,
+.markdown-editor .preview-container .preview blockquote h2,
+.markdown-editor .preview-container .preview blockquote h3,
+.markdown-editor .preview-container .preview blockquote h4,
+.markdown-editor .preview-container .preview blockquote h5,
+.markdown-editor .preview-container .preview blockquote h6,
+.markdown-editor .preview-container .preview blockquote p,
+.markdown-editor .preview-container .preview blockquote span {
+  margin: 4px;
+}
+.markdown-editor .preview-container .preview pre {
+  margin: 1em 0;
+  background-color: rgba(102, 128, 153, 0.05);
+  -webkit-box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1) inset, 45px 0 0 rgba(102, 128, 153, 0.05) inset, 0 1px 0 rgba(102, 128, 153, 0.05);
+          box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1) inset, 45px 0 0 rgba(102, 128, 153, 0.05) inset, 0 1px 0 rgba(102, 128, 153, 0.05);
+}
+.markdown-editor .preview-container .preview pre > ol {
+  margin-left: 5px;
+}
+.markdown-editor .preview-container .preview pre > ol > li {
+  padding-left: 10px;
+}
+.markdown-editor .preview-container .preview table {
+  margin: 1em 0;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.markdown-editor .preview-container .preview table thead > tr > th,
+.markdown-editor .preview-container .preview table tbody > tr > td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+.markdown-editor .preview-container .preview table tbody > tr:nth-child(even) {
+  background-color: rgba(181, 181, 181, 0.1);
+}
+.markdown-editor .editor-container {
+  position: relative;
+}
+.markdown-editor .editor-container .markdown-bar {
+  height: 48px;
+  width: 100%;
+  line-height: 48px;
+  z-index: 50;
+  overflow: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 0 20px;
+  background-color: #444;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  position: absolute;
+}
+.markdown-editor .editor-container .ReactCodeMirror {
   height: 100%;
 }
-::-webkit-scrollbar {
-  width: 9px;
+.markdown-editor .editor-container .ReactCodeMirror .CodeMirror {
+  height: 100%;
+  padding-top: 48px;
+  border-left: thin solid lightgray;
+  border-right: thin solid lightgray;
+  border-bottom: thin solid lightgray;
 }
-::-webkit-scrollbar-corner,
-::-webkit-scrollbar-thumb:window-inactive {
-  background: rgba(102, 128, 153, 0.1);
+.markdown-editor .editor-container .ReactCodeMirror .CodeMirror .CodeMirror-lines {
+  padding: 10px;
 }
-::-webkit-scrollbar-thumb {
-  background: rgba(102, 128, 153, 0.2);
-}
-::-webkit-scrollbar-track {
-  background: rgba(102, 128, 153, 0.1);
+.markdown-editor .editor-container .ReactCodeMirror .CodeMirror .CodeMirror-lines .CodeMirror-gutter-wrapper {
+  left: -42px !important;
 }

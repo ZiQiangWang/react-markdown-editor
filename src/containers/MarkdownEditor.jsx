@@ -19,7 +19,7 @@ class MarkdownEditor extends React.Component {
     super(props);
 
     this.state = {
-      markdownSrc: this.props.defaultValue,
+      markdownSrc: this.props.defaultValue ? this.props.defaultValue : "",
       toolState: {
         showMode: 0,
         fullscreen: false,
@@ -40,7 +40,9 @@ class MarkdownEditor extends React.Component {
       markdownSrc: md
     });
 
-    this.props.onChange(md);
+    if (this.props.onChange) {
+      this.props.onChange(md);
+    }
   }
 
   handleFullscreen = () => {

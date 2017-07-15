@@ -28,10 +28,6 @@ import MarkdownEditor from './containers/MarkdownEditor';
 render(
     <MarkdownEditor 
       height='350px'
-      markedOptions={{tables: false}}
-      codemirrorOptions={{lineNumbers: true}}
-      value='12'
-      defaultValue="# 123"
     />,
     document.getElementById('root')
 );
