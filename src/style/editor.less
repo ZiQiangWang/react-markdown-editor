@@ -134,10 +134,17 @@
       height: 100%;
       .CodeMirror {
         height: 100%;
-        padding: 58px 10px 10px 10px;
+        padding-top: 48px;
         border-left: @borderColor;
         border-right: @borderColor;
         border-bottom: @borderColor;
+        
+        .CodeMirror-lines {
+          padding: 10px;
+          .CodeMirror-gutter-wrapper {
+            left: -42px !important;
+          }
+        }
       }
     }
   }

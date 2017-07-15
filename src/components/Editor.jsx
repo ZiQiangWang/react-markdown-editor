@@ -16,8 +16,6 @@ import IconBtn from './IconBtn';
 class Editor extends Component {
 
   static propTypes = {
-    value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
     markBtns: PropTypes.array,
     registBtns: PropTypes.objectOf(
       PropTypes.shape({
@@ -28,17 +26,13 @@ class Editor extends Component {
         tips: PropTypes.string,
         text: PropTypes.string
       })
-    )
+    ),
   };
 
   constructor(props) {
     super(props);
 
-    this.onInputChange = this.onInputChange.bind(this);
-
-    this.state = {
-      codemirror: undefined,
-    }
+    this.codemirror = undefined;
 
     this.markdownBtns = [
       'heading','bold','italic','underline',
@@ -146,17 +140,11 @@ class Editor extends Component {
     }
   }
 
-
-  // 响应内容变化
-  onInputChange = (newValue) => {
-    this.props.onChange(newValue);
-  }
-
   // 响应使用按钮插入markdown语法的需求，主要调用codemirror的函数进行
   onQuickMarkdown = (type) => {
 
     // 获取codemirror实例
-    const mirror = this.state.codemirror;
+    const mirror = this.codemirror;
     
     const config = this.markdownMap[type];
 
@@ -191,19 +179,14 @@ class Editor extends Component {
 
   componentDidMount() {
     // 在加载完成时获取codemirror实例
-    this.setState({
-      ...this.state,
-      codemirror: this.refs.mirror.getCodeMirror()
-    })
+    this.codemirror = this.refs.mirror.getCodeMirror();
   }
 
   render() {
-    const options = {
-      mode: 'markdown',
-      lineWrapping: true,
-      autofocus: true
-    };
 
+    const {markBtns,registBtns,options,showMode, ...mirrorProps} = this.props;
+    const mirrorOptions = {...options, ...defaultOptions};
+    console.log(options, mirrorOptions);
     return (
       <div className="editor-container" style={{ display: this.props.showMode === 1 ? 'none' : 'block' }}>
         <div className="markdown-bar">
@@ -213,13 +196,18 @@ class Editor extends Component {
         </div>
         <CodeMirror 
           ref="mirror"
-          value={this.props.value} 
-          onChange={this.onInputChange} 
-          options={options}
+          options={mirrorOptions}
+          {...mirrorProps} 
         />
       </div>
     );
   }
 }
+
+const defaultOptions = {
+  mode: 'markdown',
+  lineWrapping: true,
+  autofocus: true,
+};
 
 export default Editor;

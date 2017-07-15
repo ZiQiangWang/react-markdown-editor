@@ -73,22 +73,6 @@ class MarkdownEditor extends React.Component {
 
   render() {
 
-    const registBtns =
-    {
-      'test':{
-        mark: ['# ', ' #'],
-        type: 'around',
-        icon: 'icon-font-size',
-        tips: 'Hello',
-        text: 'world'
-      },
-      'test2':{
-        mark: ['## ', ' ##'],
-        type: 'around',
-        icon: 'icon-font-size',
-        tips: 'Hello'
-      },
-    };
     return (
       <div className="markdown-editor" style={{flexDirection: this.state.toolState.order ? 'row-reverse' : 'row'}}>
         <Toolbar 
@@ -99,7 +83,8 @@ class MarkdownEditor extends React.Component {
           showMode={this.state.toolState.showMode}
           value={this.state.markdownSrc}
           onChange={this.onMarkdownChange}
-          registBtns={registBtns}
+          markBtns={this.props.markBtns}
+          registBtns={this.props.registBtns}
         />
         <Preview
           showMode={this.state.toolState.showMode}
