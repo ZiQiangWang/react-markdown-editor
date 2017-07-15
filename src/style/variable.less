@@ -1,0 +1,28 @@
+/**  
+ * @authors ZiQiangWang (814120507@qq.com)
+ * @date    2017-07-06 21:44:36
+ * @version $Id$
+ */
+
+@headerDuration: .5s;
+
+.adaptive-layout () {
+  @media screen and (min-width: 801px){
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    flex-direction: row;
+  }
+  @media screen and (max-width: 800px){
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+.editor-font () {
+  font-size: 16px;
+  font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+}
+
+@color-gray: rgb(187, 187, 187);
+@color-bluegray: rgba(102, 128, 153, 0.45);

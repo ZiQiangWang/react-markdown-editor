@@ -1,0 +1,139 @@
+/**
+ * @authors ZiQiangWang (814120507@qq.com)
+ * @date    2017-07-12 17:19:14
+ */
+
+@import 'variable.less';
+
+
+
+.markdown-editor {
+  display: flex;
+  
+  @media screen and (min-width: 801px){
+    .preview-container,.editor-container {
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 800px){
+    .preview-container {
+      width: 0% !important;
+    }
+  }
+
+  .toolbar {
+    position: fixed;
+    right: 0;
+    bottom: 2%;
+    z-index: 1000;
+  }
+  // 实时预览部分
+  .preview-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    // 预览部分工具栏
+    .preview-toolbar {
+      height: 48px;
+      z-index: 50;
+      line-height: 48px;
+      overflow: auto;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 20px;
+      background-color: #444;
+      box-shadow: 0 1px 1px rgba(0,0,0,.2);
+    }
+  
+    // 预览主界面
+    .preview {
+      position: absolute;
+      top: 48px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow-y: auto;
+      line-height: 1.5em;
+      color: #444;
+      padding: 10px 20px;
+      border-left: thin solid lightgray;
+      border-right: thin solid lightgray;
+      .editor-font;
+      
+      // markdown解析出来的结构，做样式调整
+      blockquote {
+        color: #666;
+        margin: 1em 0;
+        padding: 5px 10px;
+        border-left: 10px #D6DBDF solid;
+        background-color: rgba(102,128,153,.05);
+
+        h1, h2, h3, h4, h5, h6, p, span {
+          margin: 4px;
+        }
+      }
+
+      pre {
+        margin: 1em 0;
+        background-color: rgba(102,128,153,.05);
+        box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1) inset, 45px 0 0 rgba(102, 128, 153, 0.05) inset, 0 1px 0 rgba(102, 128, 153, 0.05);
+        > ol {
+          margin-left: 5px;
+          > li {
+            padding-left: 10px;
+          }
+        }
+      }
+
+      table {
+        margin: 1em 0;
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        thead>tr>th,tbody>tr>td{
+          padding: 8px;
+          border: 1px solid #ddd;
+        }
+        tbody>tr:nth-child(even){
+          background-color: hsla(0,0%,71%,.1);
+        }
+      }
+    }
+  }
+  // 编辑器部分
+  .editor-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    // markdown快速编辑按钮部分
+    .markdown-bar {
+      height: 48px;
+      line-height: 48px;
+      z-index: 50;
+      overflow: auto;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 20px;
+      background-color: #444;
+      box-shadow: 0 1px 1px rgba(0,0,0,.2);
+      position: relative;
+    }
+
+    .ReactCodeMirror {
+      position: absolute;
+      top: 48px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      .CodeMirror{
+        width: 100%;
+        height: 100%;
+
+        padding: 10px;
+        .editor-font;
+      }
+    }
+  }
+}

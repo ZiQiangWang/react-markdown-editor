@@ -1,0 +1,39 @@
+/**
+ * @authors ZiQiangWang (814120507@qq.com)
+ * @date    2017-07-13 13:10:39
+ * @version $Id$
+ */
+
+@import './variable.less';
+
+.btn-icon {
+    color: white;
+    font-size: .75em;
+    cursor: pointer;
+    width: auto;
+    white-space: nowrap;
+    transition: color .2s;
+    margin-right: 20px;
+    span {
+        margin-right: 5px;
+    }
+}
+
+.default {
+  color: @color-gray;
+}
+
+.default:hover {
+  color: lighten(@color-gray, 20%);
+}
+
+.bluegray {
+  color: @color-bluegray;
+}
+
+.bluegray:hover {
+  color: darken(@color-bluegray, 50%);
+}
+
+
+

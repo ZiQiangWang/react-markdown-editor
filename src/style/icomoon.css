@@ -1,0 +1,102 @@
+/**
+ * 
+ * @authors ZiQiangWang (814120507@qq.com)
+ * @date    2017-07-11 13:59:23
+ * @version $Id$
+ */
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?2jmglg');
+  src:  url('../fonts/icomoon.eot?2jmglg#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?2jmglg') format('truetype'),
+    url('../fonts/icomoon.woff?2jmglg') format('woff'),
+    url('../fonts/icomoon.svg?2jmglg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tab:before {
+  content: "\ea45";
+}
+.icon-quill:before {
+  content: "\e907";
+}
+.icon-image:before {
+  content: "\e90d";
+}
+.icon-display:before {
+  content: "\e956";
+}
+.icon-floppy-disk:before {
+  content: "\e962";
+}
+.icon-quotes-left:before {
+  content: "\e977";
+}
+.icon-enlarge:before {
+  content: "\e989";
+}
+.icon-shrink:before {
+  content: "\e98a";
+}
+.icon-list-numbered:before {
+  content: "\e9b9";
+}
+.icon-list2:before {
+  content: "\e9bb";
+}
+.icon-sphere:before {
+  content: "\e9c9";
+}
+.icon-link:before {
+  content: "\e9cb";
+}
+.icon-contrast:before {
+  content: "\e9d5";
+}
+.icon-minus:before {
+  content: "\ea0b";
+}
+.icon-arrow-up2:before {
+  content: "\ea3a";
+}
+.icon-arrow-down2:before {
+  content: "\ea3e";
+}
+.icon-font-size:before {
+  content: "\ea61";
+}
+.icon-bold:before {
+  content: "\ea62";
+}
+.icon-underline:before {
+  content: "\ea63";
+}
+.icon-italic:before {
+  content: "\ea64";
+}
+.icon-strikethrough:before {
+  content: "\ea65";
+}
+.icon-table2:before {
+  content: "\ea71";
+}
+.icon-embed2:before {
+  content: "\ea80";
+}
