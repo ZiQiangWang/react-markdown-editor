@@ -15,20 +15,6 @@ import IconBtn from './IconBtn';
 
 class Editor extends Component {
 
-  static propTypes = {
-    markBtns: PropTypes.array,
-    registBtns: PropTypes.objectOf(
-      PropTypes.shape({
-        mark: PropTypes.oneOfType([PropTypes.string,PropTypes.array]).isRequired,
-        type: PropTypes.oneOf(['around','insert']).isRequired,
-        icon: PropTypes.string.isRequired,
-        iconTheme: PropTypes.string,
-        tips: PropTypes.string,
-        text: PropTypes.string
-      })
-    ),
-  };
-
   constructor(props) {
     super(props);
 
@@ -135,8 +121,8 @@ class Editor extends Component {
 
   // 自定义新的快速markdown按钮
   registMarkdownBtn = () => {
-    if (this.props.registBtns) {
-      Object.assign(this.markdownMap, this.props.registBtns);
+    if (this.props.registMarkBtns) {
+      Object.assign(this.markdownMap, this.props.registMarkBtns);
     }
   }
 
@@ -184,9 +170,8 @@ class Editor extends Component {
 
   render() {
 
-    const {markBtns,registBtns,options,showMode, ...mirrorProps} = this.props;
+    const {markBtns,registMarkBtns,options,showMode, ...mirrorProps} = this.props;
     const mirrorOptions = {...options, ...defaultOptions};
-    console.log(options, mirrorOptions);
     return (
       <div className="editor-container" style={{ display: this.props.showMode === 1 ? 'none' : 'block' }}>
         <div className="markdown-bar">
@@ -208,6 +193,20 @@ const defaultOptions = {
   mode: 'markdown',
   lineWrapping: true,
   autofocus: true,
+};
+
+Editor.propTypes = {
+  markBtns: PropTypes.array,
+  registMarkBtns: PropTypes.objectOf(
+    PropTypes.shape({
+      mark: PropTypes.oneOfType([PropTypes.string,PropTypes.array]).isRequired,
+      type: PropTypes.oneOf(['around','insert']).isRequired,
+      icon: PropTypes.string.isRequired,
+      iconTheme: PropTypes.string,
+      tips: PropTypes.string,
+      text: PropTypes.string
+    })
+  ),
 };
 
 export default Editor;

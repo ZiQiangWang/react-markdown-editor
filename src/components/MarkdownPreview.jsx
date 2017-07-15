@@ -12,25 +12,10 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 class MarkdownPreview extends Component {
 
-  static defaultProps = {
-    options: {}
-  };
-
-  static propTypes = {
-    source: PropTypes.string.isRequired,
-    options: PropTypes.object
-  };
-
   constructor(props) {
     super(props);
-    const options = {
-      ...this.props.options,
-      highlight: function (code) {
-        return hljs.highlightAuto(code).value;
-      }
-    };
 
-    marked.setOptions(options);
+    marked.setOptions(this.props.options);
   }
 
   componentDidMount() {
@@ -76,5 +61,22 @@ class MarkdownPreview extends Component {
     return <div id="markdown-preview" className="preview"></div>
   }
 }
+
+MarkdownPreview.defaultProps = {
+  options: {breaks: true}
+};
+
+MarkdownPreview.propTypes = {
+  source: PropTypes.string.isRequired,
+  options: PropTypes.shape({
+    gfm: PropTypes.bool,
+    tables: PropTypes.bool,
+    breaks: PropTypes.bool,
+    pedantic: PropTypes.bool,
+    sanitize: PropTypes.bool,
+    smartLists: PropTypes.bool,
+    smartypants: PropTypes.bool
+  })
+};
 
 export default MarkdownPreview;

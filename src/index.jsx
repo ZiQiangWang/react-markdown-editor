@@ -8,7 +8,30 @@ import React from 'react';
 import { render } from 'react-dom';
 import MarkdownEditor from './containers/MarkdownEditor';
 
+
+// {
+//     name: PropTypes.string,
+//     defaultValue: PropTypes.string,
+//     codemirrorOptions: PropTypes.object,
+//     onChange: PropTypes.func,
+//     onCursorActivity: PropTypes.func,
+//     onFocusChange: PropTypes.func,
+//     onScroll: PropTypes.func,
+
+//     height:12,
+// markBtns
+// registMarkBtns
+//     markedOptions:{
+
+//     }
+// }
 render(
-    <MarkdownEditor />,
+    <MarkdownEditor 
+      height='350px'
+      markedOptions={{tables: false}}
+      codemirrorOptions={{lineNumbers: true}}
+      value='12'
+      defaultValue="# 123"
+    />,
     document.getElementById('root')
 );

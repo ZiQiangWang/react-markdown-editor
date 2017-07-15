@@ -6,20 +6,16 @@
 @import 'variable.less';
 @import 'icomoon.css';
 
-
 .markdown-editor {
-  
-  display: flex;
-  line-height: 1.5;
-  box-sizing: border-box;
-  height: 300px;
-  *, *:before, *:after {
-      box-sizing: inherit;
-  }
+
+  // 设置盒模型
+  .border-box;
 
   // 设置编辑器的字体
   .editor-font;
   
+  display: flex;
+  line-height: 1.5;
 
   @media screen and (min-width: 801px){
     .preview-container,.editor-container {

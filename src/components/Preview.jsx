@@ -16,7 +16,7 @@ const Preivew = (props) => {
       <PreivewNav />
       <MarkdownPreview 
         source={props.source}
-        options={{breaks: true}}
+        options={props.options}
       />
     </div>
   );
@@ -24,7 +24,8 @@ const Preivew = (props) => {
 
 Preivew.propTypes = {
   showMode: PropTypes.number.isRequired,
-  source: PropTypes.string.isRequired
+  source: PropTypes.string.isRequired,
+  options: PropTypes.object
 }
 
 
