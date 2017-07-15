@@ -10,8 +10,6 @@ import Toolbar from '../components/Toolbar';
 import Editor from '../components/Editor';
 import Preview from '../components/Preview';
 import { requestFullScreen, exitFullscreen, checkFull } from '../utils/fullscreen';
-
-import '../style/common.less';
 import '../style/editor.less';
 
 class MarkdownEditor extends React.Component {
@@ -26,29 +24,13 @@ class MarkdownEditor extends React.Component {
         fullscreen: false,
         order: false
       },
-      height: undefined
     };
 
     this.onMarkdownChange = this.onMarkdownChange.bind(this);
   }
 
-  componentDidMount() {
-    window.addEventListener('resize', this.onWindowResize)
-    this.setState({
-      ...this.state,
-      height: window.innerHeight | document.body.clientHeight
-    })
-  }
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.onWindowResize)
-  }
-
-  onWindowResize = (e) => {
-    const height = window.innerHeight | document.body.clientHeight;
-    this.setState({
-      ...this.state,
-      height: height
-    })
+  getMarkdownSrc = ()=> {
+    return this.state.markdownSrc;
   }
 
   onMarkdownChange = (md) =>  {
@@ -108,7 +90,7 @@ class MarkdownEditor extends React.Component {
       },
     };
     return (
-      <div className="wrap markdown-editor" style={{flexDirection: this.state.toolState.order ? 'row-reverse' : 'row', height: this.state.height}}>
+      <div className="markdown-editor" style={{flexDirection: this.state.toolState.order ? 'row-reverse' : 'row'}}>
         <Toolbar 
           onClick={this.onChangeToolState}
           toolState={this.state.toolState}

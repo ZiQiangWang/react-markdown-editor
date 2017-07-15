@@ -6,6 +6,7 @@
 
 @headerDuration: .5s;
 
+@borderColor: thin solid lightgray;
 .adaptive-layout () {
   @media screen and (min-width: 801px){
     -webkit-flex-direction: row;
@@ -20,8 +21,10 @@
 }
 
 .editor-font () {
-  font-size: 16px;
-  font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+  font-size: 20px;
+  h1,h2,h3,h4,h5,h6,p,span {
+    font-family: "Segoe UI",Arial,Helvetica,"Microsoft Jhenghei","Hiragino Sans GB","WenQuanYi Zen Hei","Microsoft Yahei",SimHei,STHeiti,"WenQuanYi Micro Hei",sans-serif;
+  }
 }
 
 @color-gray: rgb(187, 187, 187);
