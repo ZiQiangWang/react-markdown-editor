@@ -20,11 +20,10 @@ class MarkdownEditor extends React.Component {
 
     this.state = {
       markdownSrc: this.props.defaultValue ? this.props.defaultValue : "",
-      toolState: {
-        showMode: 0,
-        fullscreen: false,
-        order: false
-      },
+      showEditor: true,
+      showPreview: true,
+      fullscreen: false,
+      order: false
     };
 
     this.onMarkdownChange = this.onMarkdownChange.bind(this);
@@ -56,46 +55,79 @@ class MarkdownEditor extends React.Component {
 
   // 响应工具栏按钮，包括显示模式，全屏，左右顺序
   onChangeToolState = (toolType) => {
-    
-    let state;
-    if (toolType === 'showMode') {
-        state = this.state.toolState[toolType] === 2 ? 0 : this.state.toolState[toolType] + 1;
-    } else {
-      state = !this.state.toolState[toolType] ;
+    if (toolType === 'split') {
+      this.setState({
+          ...this.state,
+          showEditor: true,
+          showPreview: true
+        });
     }
-
-    if (toolType === 'fullscreen') {
+    if (toolType === 'editorOrPreview') {
+        if (this.state.showEditor && this.state.showPreview) {
+          this.setState({
+            ...this.state,
+            showPreview: false
+          });
+        } else{
+          this.setState({
+            ...this.state,
+            showEditor: !this.state.showEditor,
+            showPreview: !this.state.showPreview
+          });
+        }
+    } else if (toolType === 'fullscreen') {
+      
       this.handleFullscreen();
-    }
+      this.setState({
+        ...this.state,
+        fullscreen: !this.state.fullscreen
+      });
+    } else if(toolType === 'order') {
 
-    this.setState({
-      ...this.state,
-      toolState: {
-        ...this.state.toolState,
-        [toolType]: state
+      this.setState({
+        ...this.state,
+        order: !this.state.order
+      });
+    } else if (toolType === 'mobile-switch') {
+        if (this.state.showEditor) {
+        this.setState({
+          ...this.state,
+          showEditor: false,
+          showPreview: true
+        });
+      } else {
+        this.setState({
+          ...this.state,
+          showEditor: true,
+          showPreview: false
+        });
       }
-    });
+    }
+  }
+
+  onBothScroll = () => {
+
   }
 
   render() {
     const {codemirrorOptions, height, markedOptions, value, onChange,...mirrorConfig} = this.props;
     
     return (
-      <div className="markdown-editor" style={{flexDirection: this.state.toolState.order ? 'row-reverse' : 'row', height: height}}>
+      <div className="markdown-editor" style={{flexDirection: this.state.order ? 'row-reverse' : 'row', height: height}}>
         <Toolbar 
-          className={this.props.tool}
+          className={this.props.toolbar}
           onClick={this.onChangeToolState}
-          toolState={this.state.toolState}
         />
         <Editor 
-          showMode={this.state.toolState.showMode}
+          show={this.state.showEditor}
           value={this.state.markdownSrc}
           onChange={this.onMarkdownChange}
+          onScroll={this.onBothScroll}
           options={codemirrorOptions}
           { ...mirrorConfig }
         />
         <Preview
-          showMode={this.state.toolState.showMode}
+          show={this.state.showPreview}
           source={this.state.markdownSrc}
           options={markedOptions}
         />
@@ -109,6 +141,7 @@ MarkdownEditor.defaultProps = {
 }
 
 MarkdownEditor.propTypes = {
+  toolbar: PropTypes.string,
   height: PropTypes.string,
   editorOptions: PropTypes.object,
   markedOptions: PropTypes.object

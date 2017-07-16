@@ -23,6 +23,8 @@ class Editor extends Component {
     this.markdownBtns = [
       'heading','bold','italic','underline',
       'strikethrough','blockquote','code','list-ol',
+      'list-ul','link','table','line','picture',
+      'list-ul','link','table','line','picture',
       'list-ul','link','table','line','picture'
     ];
     
@@ -126,6 +128,11 @@ class Editor extends Component {
     }
   }
 
+  componentDidMount() {
+    // 在加载完成时获取codemirror实例
+    this.codemirror = this.refs.mirror.getCodeMirror();
+  }
+
   // 响应使用按钮插入markdown语法的需求，主要调用codemirror的函数进行
   onQuickMarkdown = (type) => {
 
@@ -163,22 +170,23 @@ class Editor extends Component {
     mirror.focus();
   }
 
-  componentDidMount() {
-    // 在加载完成时获取codemirror实例
-    this.codemirror = this.refs.mirror.getCodeMirror();
+  onPreviewScroll = (x, y) => {
+    this.codemirror.scrollTo(x, y);
   }
 
   render() {
 
-    const {markBtns,registMarkBtns,options,showMode, ...mirrorProps} = this.props;
+    const {markBtns,registMarkBtns,options,show, ...mirrorProps} = this.props;
     const mirrorOptions = {...options, ...defaultOptions};
 
     return (
-      <div className={"editor-container " + (showMode === 1 ? "disappear":"")}>
+      <div className={"editor-container " + (show ? "":"disappear")}>
         <div className="markdown-bar">
-          { this.markdownBtns.map((ele,index) => {
-            return <IconBtn key={index} config={this.markdownMap[ele]} onClick={() => this.onQuickMarkdown(ele)}/>
-          }) }
+          <div className="inner-bar">
+            { this.markdownBtns.map((ele,index) => {
+              return <IconBtn key={index} config={this.markdownMap[ele]} onClick={() => this.onQuickMarkdown(ele)}/>
+            }) }
+          </div>
         </div>
         <CodeMirror 
           ref="mirror"
@@ -197,6 +205,7 @@ const defaultOptions = {
 };
 
 Editor.propTypes = {
+  show: PropTypes.bool,
   markBtns: PropTypes.array,
   registMarkBtns: PropTypes.objectOf(
     PropTypes.shape({

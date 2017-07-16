@@ -21,9 +21,11 @@ class PreivewNav extends Component {
 
     return (
       <div className="preview-toolbar">
-        { btnList.map((ele, index) => {
-          return <IconBtn key={index} config={ele}/>
-        }) }
+        <div className="inner-bar">
+          { btnList.map((ele, index) => {
+            return <IconBtn key={index} config={ele}/>
+          }) }
+        </div>
       </div>
     );
   }
@@ -31,6 +33,70 @@ class PreivewNav extends Component {
 
 const btnList = [
   {
+    icon: 'icon-display',
+    tips: '阅读模式'
+  },{
+    icon: 'icon-quill',
+    tips: '编辑模式'
+  },{
+    icon: 'icon-enlarge',
+    tips: '全屏模式'
+  },{
+    icon: 'icon-tab',
+    tips: '交换左右视图'
+  },{
+    icon: 'icon-display',
+    tips: '阅读模式'
+  },{
+    icon: 'icon-quill',
+    tips: '编辑模式'
+  },{
+    icon: 'icon-enlarge',
+    tips: '全屏模式'
+  },{
+    icon: 'icon-tab',
+    tips: '交换左右视图'
+  }
+  ,{
+    icon: 'icon-display',
+    tips: '阅读模式'
+  },{
+    icon: 'icon-quill',
+    tips: '编辑模式'
+  },{
+    icon: 'icon-enlarge',
+    tips: '全屏模式'
+  },{
+    icon: 'icon-tab',
+    tips: '交换左右视图'
+  }
+  ,{
+    icon: 'icon-display',
+    tips: '阅读模式'
+  },{
+    icon: 'icon-quill',
+    tips: '编辑模式'
+  },{
+    icon: 'icon-enlarge',
+    tips: '全屏模式'
+  },{
+    icon: 'icon-tab',
+    tips: '交换左右视图'
+  }
+  ,{
+    icon: 'icon-display',
+    tips: '阅读模式'
+  },{
+    icon: 'icon-quill',
+    tips: '编辑模式'
+  },{
+    icon: 'icon-enlarge',
+    tips: '全屏模式'
+  },{
+    icon: 'icon-tab',
+    tips: '交换左右视图'
+  }
+  ,{
     icon: 'icon-display',
     tips: '阅读模式'
   },{

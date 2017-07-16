@@ -12,7 +12,7 @@ import MarkdownPreview from '../components/MarkdownPreview';
 
 const Preivew = (props) => {
   return (
-    <div className={"preview-container " + (props.showMode === 2 ? "disappear":"")}>
+    <div className={"preview-container " + (props.show ? "":"disappear")}>
       <PreivewNav />
       <MarkdownPreview 
         source={props.source}
@@ -23,7 +23,7 @@ const Preivew = (props) => {
 }
 
 Preivew.propTypes = {
-  showMode: PropTypes.number.isRequired,
+  show: PropTypes.bool,
   source: PropTypes.string.isRequired,
   options: PropTypes.object
 }

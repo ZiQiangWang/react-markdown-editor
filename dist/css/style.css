@@ -13,12 +13,11 @@
   cursor: pointer;
   width: auto;
   white-space: nowrap;
-  -webkit-transition: color .2s;
   transition: color .2s;
-  margin-right: 20px;
+  margin-right: 14px;
 }
 .btn-icon span {
-  margin-right: 5px;
+  margin-right: 4px;
 }
 .default {
   color: #bbbbbb;
@@ -31,105 +30,6 @@
 }
 .bluegray:hover {
   color: rgba(0, 0, 0, 0.45);
-}
-/*
-
-github.com style (c) Vasily Polovnyov <vast@whiteants.net>
-
-*/
-
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  color: #333;
-  background: #f8f8f8;
-}
-
-.hljs-comment,
-.hljs-quote {
-  color: #998;
-  font-style: italic;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-subst {
-  color: #333;
-  font-weight: bold;
-}
-
-.hljs-number,
-.hljs-literal,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-tag .hljs-attr {
-  color: #008080;
-}
-
-.hljs-string,
-.hljs-doctag {
-  color: #d14;
-}
-
-.hljs-title,
-.hljs-section,
-.hljs-selector-id {
-  color: #900;
-  font-weight: bold;
-}
-
-.hljs-subst {
-  font-weight: normal;
-}
-
-.hljs-type,
-.hljs-class .hljs-title {
-  color: #458;
-  font-weight: bold;
-}
-
-.hljs-tag,
-.hljs-name,
-.hljs-attribute {
-  color: #000080;
-  font-weight: normal;
-}
-
-.hljs-regexp,
-.hljs-link {
-  color: #009926;
-}
-
-.hljs-symbol,
-.hljs-bullet {
-  color: #990073;
-}
-
-.hljs-built_in,
-.hljs-builtin-name {
-  color: #0086b3;
-}
-
-.hljs-meta {
-  color: #999;
-  font-weight: bold;
-}
-
-.hljs-deletion {
-  background: #fdd;
-}
-
-.hljs-addition {
-  background: #dfd;
-}
-
-.hljs-emphasis {
-  font-style: italic;
-}
-
-.hljs-strong {
-  font-weight: bold;
 }
 /* BASICS */
 
@@ -408,8 +308,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 .CodeMirror-gutter,
 .CodeMirror-gutters,
 .CodeMirror-linenumber {
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
+  box-sizing: content-box;
 }
 
 .CodeMirror-measure {
@@ -466,6 +365,105 @@ div.CodeMirror-dragcursors {
 
 /* Help users use markselection to safely style text background */
 span.CodeMirror-selectedtext { background: none; }
+/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #333;
+  font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
+  font-weight: bold;
+}
+
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
+}
+
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+.hljs-deletion {
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
 /**
  * 
  * @authors ZiQiangWang (814120507@qq.com)
@@ -578,19 +576,17 @@ span.CodeMirror-selectedtext { background: none; }
  * @version $Id$
  */
 .markdown-editor {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   font-size: 16px;
   display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  line-height: 1.5;
+  overflow: hidden;
+  position: relative;
 }
 .markdown-editor *,
 .markdown-editor *:before,
 .markdown-editor *:after {
-  -webkit-box-sizing: inherit;
-          box-sizing: inherit;
+  box-sizing: inherit;
 }
 .markdown-editor h1,
 .markdown-editor h2,
@@ -601,20 +597,7 @@ span.CodeMirror-selectedtext { background: none; }
 .markdown-editor p,
 .markdown-editor span {
   font-family: "Segoe UI", Arial, Helvetica, "Microsoft Jhenghei", "Hiragino Sans GB", "WenQuanYi Zen Hei", "Microsoft Yahei", SimHei, STHeiti, "WenQuanYi Micro Hei", sans-serif;
-}
-@media screen and (min-width: 801px) {
-  .markdown-editor .preview-container,
-  .markdown-editor .editor-container {
-    width: 100%;
-  }
-}
-@media screen and (max-width: 800px) {
-  .markdown-editor .preview-container {
-    width: 0% !important;
-  }
-  .markdown-editor .editor-container {
-    width: 100% ;
-  }
+  word-break: break-word;
 }
 .markdown-editor .toolbar {
   position: fixed;
@@ -622,9 +605,40 @@ span.CodeMirror-selectedtext { background: none; }
   bottom: 2%;
   z-index: 1000;
 }
+@media screen and (min-width: 961px) {
+  .markdown-editor .toolbar {
+    display: block;
+  }
+  .markdown-editor #switch {
+    display: none;
+  }
+  .markdown-editor .preview-container {
+    display: block;
+  }
+}
+@media screen and (max-width: 960px) {
+  .markdown-editor .toolbar {
+    display: none;
+  }
+  .markdown-editor #switch {
+    display: block;
+  }
+  .markdown-editor .preview-container {
+    display: none;
+  }
+}
+.markdown-editor .show {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.markdown-editor .disappear {
+  display: none;
+}
 .markdown-editor .preview-container {
   overflow: hidden;
   position: relative;
+  width: 100%;
 }
 .markdown-editor .preview-container .preview-toolbar {
   height: 48px;
@@ -633,21 +647,17 @@ span.CodeMirror-selectedtext { background: none; }
   line-height: 48px;
   overflow: auto;
   display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: absolute;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   padding: 0 20px;
   background-color: #444;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 .markdown-editor .preview-container .preview {
   overflow-y: auto;
-  line-height: 1.5em;
+  overflow-x: hidden;
   height: 100%;
-  color: #444;
   padding: 58px 20px 10px 20px;
   border-left: thin solid lightgray;
   border-right: thin solid lightgray;
@@ -671,10 +681,9 @@ span.CodeMirror-selectedtext { background: none; }
   margin: 4px;
 }
 .markdown-editor .preview-container .preview pre {
-  margin: 1em 0;
+  line-height: 1.5em;
   background-color: rgba(102, 128, 153, 0.05);
-  -webkit-box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1) inset, 45px 0 0 rgba(102, 128, 153, 0.05) inset, 0 1px 0 rgba(102, 128, 153, 0.05);
-          box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1) inset, 45px 0 0 rgba(102, 128, 153, 0.05) inset, 0 1px 0 rgba(102, 128, 153, 0.05);
+  box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1) inset, 45px 0 0 rgba(102, 128, 153, 0.05) inset, 0 1px 0 rgba(102, 128, 153, 0.05);
 }
 .markdown-editor .preview-container .preview pre > ol {
   margin-left: 5px;
@@ -697,6 +706,7 @@ span.CodeMirror-selectedtext { background: none; }
   background-color: rgba(181, 181, 181, 0.1);
 }
 .markdown-editor .editor-container {
+  width: 100%;
   position: relative;
 }
 .markdown-editor .editor-container .markdown-bar {
@@ -706,14 +716,11 @@ span.CodeMirror-selectedtext { background: none; }
   z-index: 50;
   overflow: auto;
   display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   padding: 0 20px;
   background-color: #444;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   position: absolute;
 }
 .markdown-editor .editor-container .ReactCodeMirror {
@@ -731,4 +738,11 @@ span.CodeMirror-selectedtext { background: none; }
 }
 .markdown-editor .editor-container .ReactCodeMirror .CodeMirror .CodeMirror-lines .CodeMirror-gutter-wrapper {
   left: -42px !important;
+}
+.markdown-editor .editor-container .ReactCodeMirror .CodeMirror .CodeMirror-scroll,
+.markdown-editor .editor-container .ReactCodeMirror .CodeMirror .CodeMirror-sizer,
+.markdown-editor .editor-container .ReactCodeMirror .CodeMirror .CodeMirror-gutter,
+.markdown-editor .editor-container .ReactCodeMirror .CodeMirror .CodeMirror-gutters,
+.markdown-editor .editor-container .ReactCodeMirror .CodeMirror .CodeMirror-linenumber {
+  box-sizing: content-box !important;
 }

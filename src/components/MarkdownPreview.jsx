@@ -6,6 +6,7 @@
  */
 
 import React,{ Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import marked from 'marked';
 import hljs from 'highlight.js';
@@ -16,9 +17,15 @@ class MarkdownPreview extends Component {
     super(props);
 
     marked.setOptions(this.props.options);
+
+    this.markRender = this.initRender();
   }
 
   componentDidMount() {
+    
+    const preview = findDOMNode(this.refs.preview)
+    preview.addEventListener('scroll', this.handleScroll);
+
     this.parseMarkdown();
   }
 
@@ -26,9 +33,12 @@ class MarkdownPreview extends Component {
     this.parseMarkdown();
   }
 
-  parseMarkdown = () => {
-    const {source} = this.props;
+  componentWillUnmount() {
+      const preview = findDOMNode(this.refs.preview)
+      preview.removeEventListener('scroll', this.handleScroll);
+  }
 
+  initRender = () => {
     const renderer = new marked.Renderer();
     // 重写render，使代码部分高亮显示，并添加行号
     renderer.code =  (code, lang) => {
@@ -52,18 +62,27 @@ class MarkdownPreview extends Component {
       return codeBlock;
     }
 
-    const html = marked(source, { renderer: renderer });
+    return renderer;
+  }
+  parseMarkdown = () => {
+    const {source} = this.props;
+
+    const html = marked(source, { renderer: this.markRender });
 
     document.getElementById("markdown-preview").innerHTML = html;
   }
 
+  handleScroll = () => {
+    console.log('++++++++++++++')
+  }
+
   render() {
-    return <div id="markdown-preview" className="preview"></div>
+    return <div id="markdown-preview" className="preview" ref="preview"></div>
   }
 }
 
 MarkdownPreview.defaultProps = {
-  options: {breaks: true}
+  options: {breaks: true, lineNumber: true}
 };
 
 MarkdownPreview.propTypes = {

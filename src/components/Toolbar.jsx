@@ -14,7 +14,8 @@ import IconBtn from '../components/IconBtn';
 
 const Toolbar = (props) => {
   return (
-    <div className="toolbar">
+    <div className={props.className}>
+      <div id="pc">
       { 
         btnList.map((ele, index) => {
           return (
@@ -25,18 +26,31 @@ const Toolbar = (props) => {
             />
           );
         })
-    }
+      }
+      </div>
+      <button id="mobile" className="btn btn-round btn-orange" onClick={ () => props.onClick('mobile-switch') }>
+        点我
+      </button>
     </div>
   );
 }
 
+Toolbar.defaultProps = {
+  className: 'toolbar'
+}
 Toolbar.propTypes = {
   onClick: PropTypes.func.isRequired
 }
 
 const btnList = [
   {
-    name: 'showMode',
+    name: 'split',
+    icon: 'icon-sphere',
+    tips: '分屏显示',
+    iconTheme: 'bluegray',
+  },
+  {
+    name: 'editorOrPreview',
     icon: 'icon-display',
     tips: '切换阅读模式和编辑模式',
     iconTheme: 'bluegray',
