@@ -16,6 +16,8 @@ const Preivew = (props) => {
       <PreivewNav show={props.showNav}/>
       <MarkdownPreview 
         source={props.source}
+        buildScrollMap={props.buildScrollMap}
+        scrollY={props.scrollY}
         options={props.options}
       />
     </div>

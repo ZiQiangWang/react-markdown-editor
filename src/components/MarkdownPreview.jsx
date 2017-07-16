@@ -8,7 +8,7 @@
 import React,{ Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
-import marked from 'marked';
+import marked from '../3rd/marked';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 class MarkdownPreview extends Component {
@@ -23,20 +23,25 @@ class MarkdownPreview extends Component {
 
   componentDidMount() {
     
-    const preview = findDOMNode(this.refs.preview)
-    preview.addEventListener('scroll', this.handleScroll);
+    this.preview = findDOMNode(this.refs.preview);
+    this.preview.addEventListener('scroll', this.handleScroll);
 
     this.parseMarkdown();
   }
 
   componentDidUpdate() {
     this.parseMarkdown();
+    this.preview.scrollTop = this.props.scrollY;
   }
 
   componentWillUnmount() {
-      const preview = findDOMNode(this.refs.preview)
-      preview.removeEventListener('scroll', this.handleScroll);
+      this.preview.removeEventListener('scroll', this.handleScroll);
   }
+  
+  // shouldComponentUpdate(nextProps) {
+  //   console.log(this.props,nextProps);
+  //   return this.props.scrollY !== nextProps.scrollY;
+  // }
 
   initRender = () => {
     const renderer = new marked.Renderer();
@@ -69,11 +74,20 @@ class MarkdownPreview extends Component {
 
     const html = marked(source, { renderer: this.markRender });
 
-    document.getElementById("markdown-preview").innerHTML = html;
+    this.preview.innerHTML = html;
+   
+    const lineNumbers = this.preview.getElementsByClassName('line-number');
+    let sourceMap = {};
+    Array.from(lineNumbers).forEach((ele) => {
+      const num = ele.getAttribute('line-number');
+      sourceMap[num] = ele.offsetTop-59;
+    })
+
+    this.props.buildScrollMap(sourceMap);
   }
 
   handleScroll = () => {
-    console.log('++++++++++++++')
+    // console.log('++++++++++++++');
   }
 
   render() {

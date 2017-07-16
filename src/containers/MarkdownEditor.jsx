@@ -20,12 +20,15 @@ class MarkdownEditor extends React.Component {
 
     this.state = {
       markdownSrc: this.props.defaultValue ? this.props.defaultValue : "",
+      previewY: 0,
       showEditor: true,
       showPreview: true,
       showNav: true,
       fullscreen: false,
       order: false
     };
+
+    this.sourceMap = {};
 
     this.onMarkdownChange = this.onMarkdownChange.bind(this);
   }
@@ -111,8 +114,20 @@ class MarkdownEditor extends React.Component {
     }
   }
 
-  onBothScroll = () => {
+  onBuildScrollMap = (sourceMap) => {
+    this.sourceMap = sourceMap;
+  }
 
+  onEditorScroll = (cm) => {
+    const scrollInfo = cm.getScrollInfo();
+    const line = cm.lineAtHeight(scrollInfo.top,'local');
+    const previewY = this.sourceMap[line+1];
+    if (previewY !== undefined) {
+      this.setState({
+        ...this.state,
+        previewY: previewY
+      })
+    }
   }
 
   render() {
@@ -129,7 +144,7 @@ class MarkdownEditor extends React.Component {
           showNav={this.state.showNav}
           value={this.state.markdownSrc}
           onChange={this.onMarkdownChange}
-          onScroll={this.onBothScroll}
+          onScroll={this.onEditorScroll}
           options={codemirrorOptions}
           { ...mirrorConfig }
         />
@@ -137,6 +152,8 @@ class MarkdownEditor extends React.Component {
           showNav={this.state.showNav}
           show={this.state.showPreview}
           source={this.state.markdownSrc}
+          buildScrollMap={this.onBuildScrollMap}
+          scrollY={this.state.previewY}
           options={markedOptions}
         />
       </div>

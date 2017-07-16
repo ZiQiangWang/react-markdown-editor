@@ -18,7 +18,6 @@ class PreivewNav extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className={"preview-toolbar "+ (this.props.show ? "":"hidden-nav")}>
         <div className="inner-bar">

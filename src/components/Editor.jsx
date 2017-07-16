@@ -8,7 +8,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CodeMirror from 'react-codemirror';
+import CodeMirror from '../3rd/react-codemirror';
 import 'codemirror/mode/markdown/markdown';
 import 'codemirror/lib/codemirror.css';
 import IconBtn from './IconBtn';
