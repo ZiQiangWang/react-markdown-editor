@@ -18,9 +18,9 @@ class PreivewNav extends Component {
   }
 
   render() {
-
+    console.log(this.props);
     return (
-      <div className="preview-toolbar">
+      <div className={"preview-toolbar "+ (this.props.show ? "":"hidden-nav")}>
         <div className="inner-bar">
           { btnList.map((ele, index) => {
             return <IconBtn key={index} config={ele}/>

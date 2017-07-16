@@ -28,7 +28,7 @@ const Toolbar = (props) => {
         })
       }
       </div>
-      <button id="mobile" className="btn btn-round btn-orange" onClick={ () => props.onClick('mobile-switch') }>
+      <button id="mobile" className="btn btn-round btn-orange" onClick={ () => props.onClick('mobileSwitch') }>
         点我
       </button>
     </div>
@@ -43,6 +43,12 @@ Toolbar.propTypes = {
 }
 
 const btnList = [
+  {
+    name: 'switchNav',
+    icon: 'icon-contrast',
+    tips: '切换导航栏',
+    iconTheme: 'bluegray',
+  },
   {
     name: 'split',
     icon: 'icon-sphere',

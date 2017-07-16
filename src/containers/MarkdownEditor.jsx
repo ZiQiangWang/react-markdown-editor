@@ -22,6 +22,7 @@ class MarkdownEditor extends React.Component {
       markdownSrc: this.props.defaultValue ? this.props.defaultValue : "",
       showEditor: true,
       showPreview: true,
+      showNav: true,
       fullscreen: false,
       order: false
     };
@@ -88,7 +89,7 @@ class MarkdownEditor extends React.Component {
         ...this.state,
         order: !this.state.order
       });
-    } else if (toolType === 'mobile-switch') {
+    } else if (toolType === 'mobileSwitch') {
         if (this.state.showEditor) {
         this.setState({
           ...this.state,
@@ -102,6 +103,11 @@ class MarkdownEditor extends React.Component {
           showPreview: false
         });
       }
+    } else if (toolType ==='switchNav') {
+      this.setState({
+        ...this.state,
+        showNav: !this.state.showNav
+      });
     }
   }
 
@@ -120,6 +126,7 @@ class MarkdownEditor extends React.Component {
         />
         <Editor 
           show={this.state.showEditor}
+          showNav={this.state.showNav}
           value={this.state.markdownSrc}
           onChange={this.onMarkdownChange}
           onScroll={this.onBothScroll}
@@ -127,6 +134,7 @@ class MarkdownEditor extends React.Component {
           { ...mirrorConfig }
         />
         <Preview
+          showNav={this.state.showNav}
           show={this.state.showPreview}
           source={this.state.markdownSrc}
           options={markedOptions}

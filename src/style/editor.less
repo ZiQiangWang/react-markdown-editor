@@ -59,15 +59,30 @@
     display: none;
   }
   
+  .hidden-nav {
+    height: 0 !important;
+  }
   // 编辑部分和预览部分的工具栏
-  .inner-bar {
-    padding: 0 20px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    display: flex;
-    height: 100%;
-    width: calc(~"100% + 18px");
-    flex-wrap: wrap;
+  .preview-toolbar,
+  .markdown-bar {
+      height: 48px;
+      width: 100%;
+      z-index: 50;
+      line-height: 48px;
+      overflow: hidden;
+      background-color: #444;
+      box-shadow: 0 1px 1px rgba(0,0,0,.2); 
+      transition: height .5s;
+
+    .inner-bar {
+      padding: 0 20px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      display: flex;
+      height: 100%;
+      width: calc(~"100% + 18px");
+      flex-wrap: wrap;
+    }
   }
 
   // 实时预览部分
@@ -76,27 +91,13 @@
     position: relative;
     height: 100%;
     width: 100%;
-    // 预览部分工具栏
-    .preview-toolbar {
-      height: 48px;
-      width: 100%;
-      z-index: 50;
-      line-height: 48px;
-      overflow: hidden;
-      position: absolute;
-      background-color: #444;
-      box-shadow: 0 1px 1px rgba(0,0,0,.2);
-    }
-  
     // 预览主界面
     .preview {
       overflow-y: auto;
       overflow-x: hidden;
-      height: 100%;
-      padding: 58px 20px 10px 20px;
-      border-left: @borderColor;
-      border-right: @borderColor;
-      border-bottom: @borderColor;
+      height: calc(~"100% - 48px");
+      padding: 10px 20px 10px 20px;
+      border: @borderColor;
       
       // markdown解析出来的结构，做样式调整
       blockquote {
@@ -139,40 +140,24 @@
   }
   // 编辑器部分
   .editor-container {
-    height: 100%;
     width: 100%;
-    position: relative;
-    // markdown快速编辑按钮部分
-    .markdown-bar {
-      height: 48px;
-      width: 100%;
-      line-height: 48px;
-      z-index: 50;
-      overflow: hidden;
-      background-color: #444;
-      box-shadow: 0 1px 1px rgba(0,0,0,.2);
-      position: absolute;
+    height: 100%;
+    overflow:hidden;
+    .ReactCodeMirror {
+      height: calc(~"100% - 48px");
     }
-    
-    .ReactCodeMirror{
+    .CodeMirror {
       height: 100%;
-      .CodeMirror {
-        height: 100%;
-        padding-top: 48px;
-        border-left: @borderColor;
-        border-right: @borderColor;
-        border-bottom: @borderColor;
-        
-        .CodeMirror-lines {
-          padding: 10px;
-          .CodeMirror-gutter-wrapper {
-            left: -42px !important;
-          }
-        }
-        .CodeMirror-scroll, .CodeMirror-sizer, .CodeMirror-gutter, .CodeMirror-gutters, .CodeMirror-linenumber {
-          box-sizing: content-box !important;
-        }
-      }
+      border: @borderColor;
+      // .CodeMirror-lines {
+      //   padding: 10px;
+      //   .CodeMirror-gutter-wrapper {
+      //     left: -42px !important;
+      //   }
+      // }
+      // .CodeMirror-scroll, .CodeMirror-sizer, .CodeMirror-gutter, .CodeMirror-gutters, .CodeMirror-linenumber {
+      //   box-sizing: content-box !important;
+      // }
     }
   }
 }

@@ -176,12 +176,12 @@ class Editor extends Component {
 
   render() {
 
-    const {markBtns,registMarkBtns,options,show, ...mirrorProps} = this.props;
+    const {markBtns,registMarkBtns,options,show,showNav, ...mirrorProps} = this.props;
     const mirrorOptions = {...options, ...defaultOptions};
 
     return (
       <div className={"editor-container " + (show ? "":"disappear")}>
-        <div className="markdown-bar">
+        <div className={"markdown-bar " + (showNav ? "":"hidden-nav")} >
           <div className="inner-bar">
             { this.markdownBtns.map((ele,index) => {
               return <IconBtn key={index} config={this.markdownMap[ele]} onClick={() => this.onQuickMarkdown(ele)}/>
