@@ -21,6 +21,7 @@ class MarkdownEditor extends React.Component {
     this.state = {
       markdownSrc: this.props.defaultValue ? this.props.defaultValue : "",
       previewY: 0,
+      editorY: 0,
       showEditor: true,
       showPreview: true,
       showNav: true,
@@ -130,6 +131,13 @@ class MarkdownEditor extends React.Component {
     }
   }
 
+  onPreviewScroll = (previewY) => {
+    this.setState({
+      ...this.state,
+      previewY: previewY
+    });
+  }
+
   render() {
     const {codemirrorOptions, height, markedOptions, value, onChange,...mirrorConfig} = this.props;
     
@@ -144,6 +152,7 @@ class MarkdownEditor extends React.Component {
           showNav={this.state.showNav}
           value={this.state.markdownSrc}
           onChange={this.onMarkdownChange}
+          scrollY={this.state.editorY}
           onScroll={this.onEditorScroll}
           options={codemirrorOptions}
           { ...mirrorConfig }
@@ -154,6 +163,7 @@ class MarkdownEditor extends React.Component {
           source={this.state.markdownSrc}
           buildScrollMap={this.onBuildScrollMap}
           scrollY={this.state.previewY}
+          onScroll={this.onPreviewScroll}
           options={markedOptions}
         />
       </div>

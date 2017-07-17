@@ -170,10 +170,6 @@ class Editor extends Component {
     mirror.focus();
   }
 
-  onPreviewScroll = (x, y) => {
-    this.codemirror.scrollTo(x, y);
-  }
-
   render() {
 
     const {markBtns,registMarkBtns,options,show,showNav, ...mirrorProps} = this.props;
@@ -206,6 +202,7 @@ const defaultOptions = {
 
 Editor.propTypes = {
   show: PropTypes.bool,
+  showNav: PropTypes.bool,
   markBtns: PropTypes.array,
   registMarkBtns: PropTypes.objectOf(
     PropTypes.shape({

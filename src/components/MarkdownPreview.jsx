@@ -37,11 +37,6 @@ class MarkdownPreview extends Component {
   componentWillUnmount() {
       this.preview.removeEventListener('scroll', this.handleScroll);
   }
-  
-  // shouldComponentUpdate(nextProps) {
-  //   console.log(this.props,nextProps);
-  //   return this.props.scrollY !== nextProps.scrollY;
-  // }
 
   initRender = () => {
     const renderer = new marked.Renderer();
@@ -86,8 +81,8 @@ class MarkdownPreview extends Component {
     this.props.buildScrollMap(sourceMap);
   }
 
-  handleScroll = () => {
-    // console.log('++++++++++++++');
+  handleScroll = (data) => {
+    this.props.onScroll(this.preview.scrollTop);
   }
 
   render() {

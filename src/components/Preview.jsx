@@ -11,14 +11,12 @@ import PreivewNav from './PreivewNav';
 import MarkdownPreview from '../components/MarkdownPreview';
 
 const Preivew = (props) => {
+  const {showNav, ...preivewProps} = props;
   return (
     <div className={"preview-container " + (props.show ? "":"disappear")}>
-      <PreivewNav show={props.showNav}/>
+      <PreivewNav show={showNav}/>
       <MarkdownPreview 
-        source={props.source}
-        buildScrollMap={props.buildScrollMap}
-        scrollY={props.scrollY}
-        options={props.options}
+        {...preivewProps}
       />
     </div>
   );
