@@ -39,7 +39,7 @@ Toolbar.defaultProps = {
   className: 'toolbar'
 }
 Toolbar.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func
 }
 
 const btnList = [

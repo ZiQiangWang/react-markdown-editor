@@ -7,10 +7,10 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import deepAssign from 'deep-assign';
 import Toolbar from '../components/Toolbar';
 import Editor from '../components/Editor';
-import Preview from '../components/Preview';
-import { requestFullScreen, exitFullscreen, checkFull } from '../utils/fullscreen';
+import MarkdownPreview from '../components/MarkdownPreview';
 import '../style/editor.less';
 
 class MarkdownEditor extends React.Component {
@@ -20,22 +20,20 @@ class MarkdownEditor extends React.Component {
 
     this.state = {
       markdownSrc: this.props.defaultValue ? this.props.defaultValue : "",
-      previewY: 0,
-      editorY: 0,
-      showEditor: true,
-      showPreview: true,
-      showNav: true,
-      fullscreen: false,
-      order: false
     };
 
-    this.sourceMap = {};
+    this.owner = 'editor';
 
-    this.onMarkdownChange = this.onMarkdownChange.bind(this);
+    this.editorLine = 0;
   }
 
   getMarkdownSrc = ()=> {
     return this.state.markdownSrc;
+  }
+
+  componentDidMount() {
+    this.editor = this.refs.editor.editorInstance();
+    this.preview = this.refs.preview.previewInstance();
   }
 
   onMarkdownChange = (md) =>  {
@@ -43,126 +41,74 @@ class MarkdownEditor extends React.Component {
       ...this.state,
       markdownSrc: md
     });
-
-    if (this.props.onChange) {
-      this.props.onChange(md);
-    }
   }
 
-  handleFullscreen = () => {
-      
-    if (checkFull()) {
-        exitFullscreen();
-    } else {
-        requestFullScreen();
-    }
+  previewOwner = () => {
+    this.owner = 'preview';
   }
 
-  // 响应工具栏按钮，包括显示模式，全屏，左右顺序
-  onChangeToolState = (toolType) => {
-    if (toolType === 'split') {
-      this.setState({
-          ...this.state,
-          showEditor: true,
-          showPreview: true
-        });
-    }
-    if (toolType === 'editorOrPreview') {
-        if (this.state.showEditor && this.state.showPreview) {
-          this.setState({
-            ...this.state,
-            showPreview: false
-          });
-        } else{
-          this.setState({
-            ...this.state,
-            showEditor: !this.state.showEditor,
-            showPreview: !this.state.showPreview
-          });
-        }
-    } else if (toolType === 'fullscreen') {
-      
-      this.handleFullscreen();
-      this.setState({
-        ...this.state,
-        fullscreen: !this.state.fullscreen
-      });
-    } else if(toolType === 'order') {
-
-      this.setState({
-        ...this.state,
-        order: !this.state.order
-      });
-    } else if (toolType === 'mobileSwitch') {
-        if (this.state.showEditor) {
-        this.setState({
-          ...this.state,
-          showEditor: false,
-          showPreview: true
-        });
-      } else {
-        this.setState({
-          ...this.state,
-          showEditor: true,
-          showPreview: false
-        });
-      }
-    } else if (toolType ==='switchNav') {
-      this.setState({
-        ...this.state,
-        showNav: !this.state.showNav
-      });
-    }
+  editorOwner = () => {
+    this.owner = 'editor';
   }
-
-  onBuildScrollMap = (sourceMap) => {
-    this.sourceMap = sourceMap;
-  }
-
   onEditorScroll = (cm) => {
-    const scrollInfo = cm.getScrollInfo();
-    const line = cm.lineAtHeight(scrollInfo.top,'local');
-    const previewY = this.sourceMap[line+1];
-    if (previewY !== undefined) {
-      this.setState({
-        ...this.state,
-        previewY: previewY
-      })
+
+    if (this.owner === 'editor') {
+       
+      const scrollInfo = this.editor.getScrollInfo();
+      this.editorLine = this.editor.lineAtHeight(scrollInfo.top,'local');
+      const previewPos = this.preview.querySelector(`[line-number="${this.editorLine+1}"]`);
+      if (previewPos != null) {
+        this.preview.scrollTop = previewPos.offsetTop-10;
+      }
     }
   }
 
-  onPreviewScroll = (previewY) => {
-    this.setState({
-      ...this.state,
-      previewY: previewY
-    });
+  onPreviewScroll = (e) => {
+    if (this.owner === 'preview') {
+
+      const lineNumbers = this.preview.getElementsByClassName('line-number');
+
+      let line = 0;
+      for(let ele of lineNumbers) {
+        if (this.preview.scrollTop >= ele.offsetTop) {
+          line = ele.getAttribute('line-number');
+        }
+      }
+
+      const height = this.editor.heightAtLine(parseInt(line),'local');
+      this.editor.scrollTo(null,height);
+    }
   }
 
   render() {
-    const {codemirrorOptions, height, markedOptions, value, onChange,...mirrorConfig} = this.props;
-    
+    const {height, showEditor, showEditorNav, showPreview, showOrder,
+            markedOptions, codemirrorOptions,markBtns,registMarkBtns } = this.props;
+
     return (
-      <div className="markdown-editor" style={{flexDirection: this.state.order ? 'row-reverse' : 'row', height: height}}>
+      <div className="markdown-editor" 
+          style={{flexDirection: showOrder ? 'row' : 'row-reverse', height: height}}
+      >
         <Toolbar 
           className={this.props.toolbar}
           onClick={this.onChangeToolState}
         />
         <Editor 
-          show={this.state.showEditor}
-          showNav={this.state.showNav}
+          ref="editor"
+          show={showEditor}
+          showNav={showEditorNav}
+          options={codemirrorOptions}
+          markBtns={this.props.markBtns}
+          registMarkBtns={this.props.registMarkBtns}
           value={this.state.markdownSrc}
           onChange={this.onMarkdownChange}
-          scrollY={this.state.editorY}
+          onMouseEnter={this.editorOwner}
           onScroll={this.onEditorScroll}
-          options={codemirrorOptions}
-          { ...mirrorConfig }
         />
-        <Preview
-          showNav={this.state.showNav}
-          show={this.state.showPreview}
+        <MarkdownPreview
+          ref="preview"
+          show={showPreview}
           source={this.state.markdownSrc}
-          buildScrollMap={this.onBuildScrollMap}
-          scrollY={this.state.previewY}
+          onMouseEnter={this.previewOwner}
           onScroll={this.onPreviewScroll}
           options={markedOptions}
         />
@@ -172,7 +118,11 @@ class MarkdownEditor extends React.Component {
 }
 
 MarkdownEditor.defaultProps = {
-  height: '400px'
+  height: '400px',
+  showEditor: true,
+  showEditorNav: true,
+  showPreview: true,
+  showOrder: true,
 }
 
 MarkdownEditor.propTypes = {

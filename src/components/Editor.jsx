@@ -170,14 +170,18 @@ class Editor extends Component {
     mirror.focus();
   }
 
+  editorInstance = () => {
+    return this.codemirror;
+  }
+
   render() {
 
-    const {markBtns,registMarkBtns,options,show,showNav, ...mirrorProps} = this.props;
+    const {show,showNav,markBtns,registMarkBtns,options,onMouseEnter, ...mirrorProps} = this.props;
     const mirrorOptions = {...options, ...defaultOptions};
 
     return (
-      <div className={"editor-container " + (show ? "":"disappear")}>
-        <div className={"markdown-bar " + (showNav ? "":"hidden-nav")} >
+      <div className={"editor-container " + (show ? "":"disappear")} onMouseEnter={onMouseEnter}>
+        <div className="markdown-bar" style={{height: showNav ? "48px" : "0"}}>
           <div className="inner-bar">
             { this.markdownBtns.map((ele,index) => {
               return <IconBtn key={index} config={this.markdownMap[ele]} onClick={() => this.onQuickMarkdown(ele)}/>
@@ -186,6 +190,7 @@ class Editor extends Component {
         </div>
         <CodeMirror 
           ref="mirror"
+          className={showNav ? "": "show-nav"}
           options={mirrorOptions}
           {...mirrorProps} 
         />

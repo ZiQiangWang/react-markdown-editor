@@ -16,26 +16,20 @@ class MarkdownPreview extends Component {
   constructor(props) {
     super(props);
 
-    marked.setOptions(this.props.options);
+    marked.setOptions({
+      ...defaultOptions,
+      ...this.props.options
+    });
 
     this.markRender = this.initRender();
+
+    this.preview = undefined;
   }
 
   componentDidMount() {
     
     this.preview = findDOMNode(this.refs.preview);
-    this.preview.addEventListener('scroll', this.handleScroll);
 
-    this.parseMarkdown();
-  }
-
-  componentDidUpdate() {
-    this.parseMarkdown();
-    this.preview.scrollTop = this.props.scrollY;
-  }
-
-  componentWillUnmount() {
-      this.preview.removeEventListener('scroll', this.handleScroll);
   }
 
   initRender = () => {
@@ -64,46 +58,45 @@ class MarkdownPreview extends Component {
 
     return renderer;
   }
-  parseMarkdown = () => {
-    const {source} = this.props;
 
-    const html = marked(source, { renderer: this.markRender });
-
-    this.preview.innerHTML = html;
-   
-    const lineNumbers = this.preview.getElementsByClassName('line-number');
-    let sourceMap = {};
-    Array.from(lineNumbers).forEach((ele) => {
-      const num = ele.getAttribute('line-number');
-      sourceMap[num] = ele.offsetTop-59;
-    })
-
-    this.props.buildScrollMap(sourceMap);
-  }
-
-  handleScroll = (data) => {
-    this.props.onScroll(this.preview.scrollTop);
+  previewInstance = () => {
+    return this.preview;
   }
 
   render() {
-    return <div id="markdown-preview" className="preview" ref="preview"></div>
+
+    const {show,source,options, ...others} = this.props;
+
+    const html = marked(source, {renderer: this.markRende});
+
+    return (
+      <div 
+        ref="preview"
+        className={"preview " + (show ? "":"disappear")}
+        dangerouslySetInnerHTML={{ __html: html}}
+        {...others}
+      >
+      </div>
+    );
   }
 }
 
-MarkdownPreview.defaultProps = {
-  options: {breaks: true, lineNumber: true}
-};
+const defaultOptions = {
+  breaks: true, 
+  lineNumber: true
+}
 
 MarkdownPreview.propTypes = {
   source: PropTypes.string.isRequired,
-  options: PropTypes.shape({
+  options: PropTypes.shape({ 
     gfm: PropTypes.bool,
     tables: PropTypes.bool,
     breaks: PropTypes.bool,
     pedantic: PropTypes.bool,
     sanitize: PropTypes.bool,
     smartLists: PropTypes.bool,
-    smartypants: PropTypes.bool
+    smartypants: PropTypes.bool,
+    lineNumbers: PropTypes.bool
   })
 };
 

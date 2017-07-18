@@ -27,9 +27,11 @@ import MarkdownEditor from './containers/MarkdownEditor';
 // }
 render(
     <MarkdownEditor 
-      height='350px'
       codemirrorOptions={
         {lineNumbers: true}
+      }
+      markedOptions={
+        {tables: false}
       }
     />,
     document.getElementById('root')
