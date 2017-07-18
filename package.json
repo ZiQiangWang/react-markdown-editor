@@ -1,5 +1,5 @@
 {
-  "name": "react-markdown-editor",
+  "name": "react-markdown-preview-editor",
   "version": "1.0.0",
   "description": "A markdown editor based on marked",
   "main": "src/containers/MarkdownEditor.jsx",
