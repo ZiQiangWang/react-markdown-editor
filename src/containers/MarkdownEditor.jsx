@@ -7,11 +7,11 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import deepAssign from 'deep-assign';
-import Toolbar from '../components/Toolbar';
 import Editor from '../components/Editor';
 import MarkdownPreview from '../components/MarkdownPreview';
 import '../style/editor.less';
+import '../style/components.less';
+import '../style/icomoon.css';
 
 class MarkdownEditor extends React.Component {
 
@@ -82,16 +82,11 @@ class MarkdownEditor extends React.Component {
 
   render() {
     const {height, showEditor, showEditorNav, showPreview, showOrder,
-            markedOptions, codemirrorOptions,markBtns,registMarkBtns } = this.props;
+            markedOptions, codemirrorOptions,markBtns,registMarkBtns,defaultValue } = this.props;
 
     return (
       <div className="markdown-editor" 
-          style={{flexDirection: showOrder ? 'row' : 'row-reverse', height: height}}
-      >
-        <Toolbar 
-          className={this.props.toolbar}
-          onClick={this.onChangeToolState}
-        />
+          style={{flexDirection: showOrder ? 'row' : 'row-reverse', height: height}}>
         <Editor 
           ref="editor"
           show={showEditor}
@@ -99,6 +94,7 @@ class MarkdownEditor extends React.Component {
           options={codemirrorOptions}
           markBtns={this.props.markBtns}
           registMarkBtns={this.props.registMarkBtns}
+          defaultValue={defaultValue}
           value={this.state.markdownSrc}
           onChange={this.onMarkdownChange}
           onMouseEnter={this.editorOwner}
@@ -126,8 +122,12 @@ MarkdownEditor.defaultProps = {
 }
 
 MarkdownEditor.propTypes = {
-  toolbar: PropTypes.string,
+  defaultValue: PropTypes.string,
   height: PropTypes.string,
+  showEditor: PropTypes.bool,
+  showEditorNav: PropTypes.bool,
+  showPreview: PropTypes.bool,
+  showOrder: PropTypes.bool,
   editorOptions: PropTypes.object,
   markedOptions: PropTypes.object
 };

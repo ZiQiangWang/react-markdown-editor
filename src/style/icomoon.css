@@ -31,29 +31,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-tab:before {
-  content: "\ea45";
-}
-.icon-quill:before {
-  content: "\e907";
-}
 .icon-image:before {
   content: "\e90d";
 }
-.icon-display:before {
-  content: "\e956";
-}
-.icon-floppy-disk:before {
-  content: "\e962";
-}
 .icon-quotes-left:before {
   content: "\e977";
-}
-.icon-enlarge:before {
-  content: "\e989";
-}
-.icon-shrink:before {
-  content: "\e98a";
 }
 .icon-list-numbered:before {
   content: "\e9b9";
@@ -61,23 +43,11 @@
 .icon-list2:before {
   content: "\e9bb";
 }
-.icon-sphere:before {
-  content: "\e9c9";
-}
 .icon-link:before {
   content: "\e9cb";
 }
-.icon-contrast:before {
-  content: "\e9d5";
-}
 .icon-minus:before {
   content: "\ea0b";
-}
-.icon-arrow-up2:before {
-  content: "\ea3a";
-}
-.icon-arrow-down2:before {
-  content: "\ea3e";
 }
 .icon-font-size:before {
   content: "\ea61";
@@ -100,3 +70,4 @@
 .icon-embed2:before {
   content: "\ea80";
 }
+

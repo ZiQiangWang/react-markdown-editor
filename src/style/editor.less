@@ -4,7 +4,6 @@
  */
 
 @import 'variable.less';
-@import 'icomoon.css';
 
 .markdown-editor {
 
@@ -18,38 +17,12 @@
 
   overflow: hidden;
   position: relative;
-  
-  // 工具栏显示
-  .toolbar {
-    position: fixed;
-    right: 0;
-    bottom: 4%;
-    z-index: 1000;
-  }
 
   // 响应式变化
   @media screen and (min-width: 961px){
-    .toolbar {
-      #pc {
-        display: block;
-      }
-      #mobile{
-        display: none;
-      }
-    }
+
   }
   @media screen and (max-width: 960px){
-    .toolbar {
-      #pc {
-        display: none;
-      }
-      #mobile{
-        display: block;
-        position: relative;
-        left: -50%;
-        bottom: -100%;
-      }
-    }
 
     flex-direction: column !important;
   }

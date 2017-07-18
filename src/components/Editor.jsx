@@ -8,7 +8,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CodeMirror from '../3rd/react-codemirror';
+import CodeMirror from 'react-codemirror';
 import 'codemirror/mode/markdown/markdown';
 import 'codemirror/lib/codemirror.css';
 import IconBtn from './IconBtn';
@@ -23,8 +23,6 @@ class Editor extends Component {
     this.markdownBtns = [
       'heading','bold','italic','underline',
       'strikethrough','blockquote','code','list-ol',
-      'list-ul','link','table','line','picture',
-      'list-ul','link','table','line','picture',
       'list-ul','link','table','line','picture'
     ];
     
@@ -33,8 +31,7 @@ class Editor extends Component {
         mark: '# ',
         type: 'insert',
         icon: 'icon-font-size',
-        iconTheme: '',
-        tips: ''
+        tips: '标题'
       },
       bold: {
         mark: ['**','**'],
@@ -51,52 +48,62 @@ class Editor extends Component {
       underline: {
         mark: ['<u>','</u>'],
         type: 'around',
-        icon: 'icon-underline'
+        icon: 'icon-underline',
+        tips: '下划线'
       },
       strikethrough: {
         mark: ['~~','~~'],
         type: 'around',
-        icon: 'icon-strikethrough'
+        icon: 'icon-strikethrough',
+        tips: '删除线'
       },
       blockquote: {
         mark: '> ',
         type: 'insert',
-        icon: 'icon-quotes-left'
+        icon: 'icon-quotes-left',
+        tips: '引用'
       },
       code: {
         mark: ['```js\n','\n```'],
         type: 'around',
-        icon: 'icon-embed2'
+        icon: 'icon-embed2',
+        tips: '代码段'
       },
       'list-ol': {
         mark: '1. ',
         type: 'insert',
-        icon: 'icon-list-numbered'
+        icon: 'icon-list-numbered',
+        tips: '有序列表'
       },
       'list-ul': {
         mark: '* ',
         type: 'insert',
-        icon: 'icon-list2'
+        icon: 'icon-list2',
+        tips: '无序列表'
       },
       link: {
         mark: ['[',']()'],
         type: 'around',
-        icon: 'icon-link'
+        icon: 'icon-link',
+        tips: '链接'
       },
       table: {
         mark: '\ncolumn1 | column2 | column3  \n------- | ------- | -------  \ncolumn1 | column2 | column3  \ncolumn1 | column2 | column3  \ncolumn1 | column2 | column3 \n',
         type: 'insert',
-        icon: 'icon-table2'
+        icon: 'icon-table2',
+        tips: '表格'
       },
       line: {
         mark: '\n----\n',
         type: 'insert',
-        icon: 'icon-minus'
+        icon: 'icon-minus',
+        tips: '分割线'
       },
       picture: {
         mark: ['![',']()'],
         type: 'around',
-        icon: 'icon-image'
+        icon: 'icon-image',
+        tips: '图片'
       }
     };
 
@@ -176,7 +183,7 @@ class Editor extends Component {
 
   render() {
 
-    const {show,showNav,markBtns,registMarkBtns,options,onMouseEnter, ...mirrorProps} = this.props;
+    const {show,showNav,markBtns,registMarkBtns,options,onMouseEnter,defaultValue, ...mirrorProps} = this.props;
     const mirrorOptions = {...options, ...defaultOptions};
 
     return (
@@ -203,6 +210,7 @@ const defaultOptions = {
   mode: 'markdown',
   lineWrapping: true,
   autofocus: true,
+  defaultValue: "hello"
 };
 
 Editor.propTypes = {

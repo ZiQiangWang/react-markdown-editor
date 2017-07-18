@@ -2,11 +2,12 @@
   "name": "react-markdown-editor",
   "version": "1.0.0",
   "description": "A markdown editor based on marked",
-  "main": "index.js",
+  "main": "src/containers/MarkdownEditor.jsx",
   "scripts": {
     "start": "set NODE_ENV=dev && webpack-dev-server --open",
-    "build": "webpack",
+    "build": "webpack --config webpack.config.prod.js",
     "test": "jest --coverage",
+    "demo": "webpack --config webpack.config.demo.js",
     "lint": "eslint src/ --fix"
   },
   "repository": {
@@ -51,9 +52,7 @@
     "webpack-dev-server": "^2.5.0"
   },
   "dependencies": {
-    "deep-assign": "^2.0.0",
     "highlight.js": "^9.12.0",
-    "marked": "^0.3.6",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-codemirror": "^1.0.0",

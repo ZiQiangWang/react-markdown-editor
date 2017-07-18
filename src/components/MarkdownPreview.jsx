@@ -10,7 +10,6 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import marked from '../3rd/marked';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/github.css';
 class MarkdownPreview extends Component {
 
   constructor(props) {
@@ -26,16 +25,10 @@ class MarkdownPreview extends Component {
     this.preview = undefined;
   }
 
-  componentDidMount() {
-    
-    this.preview = findDOMNode(this.refs.preview);
-
-  }
-
   initRender = () => {
     const renderer = new marked.Renderer();
     // 重写render，使代码部分高亮显示，并添加行号
-    renderer.code =  (code, lang) => {
+    renderer.code = (code, lang) => {
       // 判断该语言是否能解析
       const validLang = !!(lang && hljs.getLanguage(lang));
       // 将代码分行
@@ -56,7 +49,19 @@ class MarkdownPreview extends Component {
       return codeBlock;
     }
 
+    renderer.heading = function (text, level) {
+      var escapedText = text.toLowerCase().replace(/[^\u4e00-\u9fa5\w]+/g, '-');
+    
+      return `<h${level} id="${escapedText}">${text}</h${level}>`;
+    }
+
     return renderer;
+  }
+
+  componentDidMount() {
+    
+    this.preview = findDOMNode(this.refs.preview);
+
   }
 
   previewInstance = () => {
@@ -67,8 +72,8 @@ class MarkdownPreview extends Component {
 
     const {show,source,options, ...others} = this.props;
 
-    const html = marked(source, {renderer: this.markRende});
-
+    const html = marked(source, {renderer: this.markRender});
+  
     return (
       <div 
         ref="preview"
