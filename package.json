@@ -56,6 +56,7 @@
     "highlight.js": "^9.12.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
+    "codemirror": "^5.27.4",
     "react-codemirror": "^1.0.0",
     "react-dom": "^15.6.1"
   }
