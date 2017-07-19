@@ -1,6 +1,6 @@
 {
   "name": "react-markdown-preview-editor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A markdown editor based on marked",
   "main": "lib/index.js",
   "scripts": {
