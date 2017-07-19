@@ -211,6 +211,12 @@ const defaultOptions = {
   autofocus: true
 };
 
+Editor.defaultProps = {
+  show: true,
+  showNav: true,
+  height: '300px'
+}
+
 Editor.propTypes = {
   show: PropTypes.bool,
   showNav: PropTypes.bool,

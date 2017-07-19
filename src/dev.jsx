@@ -7,12 +7,12 @@
 
 import React from 'react';
 import {render} from 'react-dom';
+import MarkdownPreview from './components/MarkdownPreview';
+import Editor from './components/Editor';
 import MarkdownEditor from './containers/MarkdownEditor';
 import './style/index.less';
 
-console.log(MarkdownEditor);
-
 render(
-  <MarkdownEditor />, 
+  <Editor />, 
   document.getElementById('root')
 );

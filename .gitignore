@@ -2,4 +2,5 @@ node_modules
 coverage
 npm-debug.log
 *.xmind
-dist
+./dist
+src/dev.jsx

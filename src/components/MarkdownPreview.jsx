@@ -91,6 +91,11 @@ const defaultOptions = {
   lineNumber: true
 }
 
+MarkdownPreview.defaultProps = {
+  show: true,
+  source: ""
+}
+
 MarkdownPreview.propTypes = {
   source: PropTypes.string.isRequired,
   options: PropTypes.shape({ 
