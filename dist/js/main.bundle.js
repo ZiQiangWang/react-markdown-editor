@@ -20749,6 +20749,8 @@ var _reactDom = __webpack_require__(37);
 
 var _MarkdownEditor = __webpack_require__(187);
 
+var _MarkdownEditor2 = _interopRequireDefault(_MarkdownEditor);
+
 __webpack_require__(381);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -20759,7 +20761,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @date    2017-07-19 21:24:46
  */
 
-(0, _reactDom.render)(_react2.default.createElement(_MarkdownEditor.MarkdownEditor, null), document.getElementById('root'));
+console.log(_MarkdownEditor2.default);
+
+(0, _reactDom.render)(_react2.default.createElement(_MarkdownEditor2.default, null), document.getElementById('root'));
 
 /***/ }),
 /* 89 */
