@@ -208,7 +208,8 @@ class Editor extends Component {
 
 const defaultOptions = {
   mode: 'markdown',
-  autofocus: true
+  autofocus: true,
+  lineWrapping: true
 };
 
 Editor.defaultProps = {
