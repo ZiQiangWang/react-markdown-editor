@@ -5,8 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "set NODE_ENV=dev && webpack-dev-server --open",
-    "build": "webpack",
-    "publish": "rimraf lib && babel src --out-dir lib && webpack --config webpack.config.prod.js",
+    "build": "rimraf lib && babel src --out-dir lib && webpack --config webpack.config.prod.js",
     "test": "jest --coverage",
     "demo": "webpack --config webpack.config.example.js",
     "lint": "eslint src/ --fix"
