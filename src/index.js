@@ -1,8 +1,8 @@
-import React from 'react';
-import { render } from 'react-dom';
+
 import MarkdownEditor from './containers/MarkdownEditor';
 
-render(
-    <MarkdownEditor />,
-    document.getElementById('root')
-);
+import Editor from './components/Editor';
+
+import MarkdownPreview from './components/MarkdownPreview';
+
+export { MarkdownEditor, Editor, MarkdownPreview}

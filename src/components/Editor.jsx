@@ -183,7 +183,7 @@ class Editor extends Component {
 
   render() {
 
-    const {show,showNav,markBtns,registMarkBtns,options,onMouseEnter,defaultValue, ...mirrorProps} = this.props;
+    const {show,showNav,markBtns,registMarkBtns,options,onMouseEnter, ...mirrorProps} = this.props;
     const mirrorOptions = {...options, ...defaultOptions};
 
     return (
@@ -208,9 +208,7 @@ class Editor extends Component {
 
 const defaultOptions = {
   mode: 'markdown',
-  lineWrapping: true,
-  autofocus: true,
-  defaultValue: "hello"
+  autofocus: true
 };
 
 Editor.propTypes = {

@@ -12,17 +12,10 @@ const PATHS = {
 };
 
 module.exports = {
-    devtool: false,
-    entry: {
-        main: './src/index',
-        vendor: ['react','react-dom','react-codemirror','highlight.js','prop-types']
-    },
+    entry: './src/dev',
     output: {
         path: PATHS.dist,
         filename: 'js/[name].bundle.js',
-        library: 'JsonStruct',
-        libraryTarget: 'umd',
-        umdNamedDefine: true
     },
     module: {
         rules: [
@@ -81,10 +74,6 @@ module.exports = {
         new extractTextPlugin("css/style.css"),
         new webpack.DefinePlugin({
             __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
-        }),
-        new webpack.optimize.CommonsChunkPlugin({ 
-            name: 'vendor', 
-            filename: 'js/vendor.bundle.js' 
         })
     ],
     resolve: {

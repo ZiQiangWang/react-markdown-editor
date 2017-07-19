@@ -9,9 +9,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Editor from '../components/Editor';
 import MarkdownPreview from '../components/MarkdownPreview';
-import '../style/editor.less';
-import '../style/components.less';
-import '../style/icomoon.css';
 
 class MarkdownEditor extends React.Component {
 
@@ -81,8 +78,18 @@ class MarkdownEditor extends React.Component {
   }
 
   render() {
-    const {height, showEditor, showEditorNav, showPreview, showOrder,
-            markedOptions, codemirrorOptions,markBtns,registMarkBtns,defaultValue } = this.props;
+    const {
+      height, 
+      showEditor, 
+      showEditorNav, 
+      showPreview, 
+      showOrder,
+      markedOptions, 
+      codemirrorOptions,
+      markBtns,
+      registMarkBtns,
+      defaultValue 
+    } = this.props;
 
     return (
       <div className="markdown-editor" 
