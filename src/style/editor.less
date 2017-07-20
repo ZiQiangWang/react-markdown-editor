@@ -82,6 +82,12 @@
       background-color: hsla(0,0%,71%,.1);
     }
   }
+
+  hr {
+    height:1px;
+    border:none;
+    border-top:1px solid lightgray;
+  }
 }
 
 // 编辑器部分
@@ -102,8 +108,6 @@
     z-index: 50;
     line-height: 48px;
     overflow: hidden;
-    // background-color: #444;
-    // box-shadow: 0 1px 1px rgba(0,0,0,.2); 
     transition: height .5s;
 
     .inner-bar {
@@ -122,12 +126,12 @@
   }
   .ReactCodeMirror {
     height: 100%;
-    padding-top: 48px;
     border: @borderColor;
     transition: padding-top .5s;
   }
   .CodeMirror {
     height: 100%;
+    padding-top: 48px;
     .CodeMirror-line {
       padding: 2px 20px;
     }

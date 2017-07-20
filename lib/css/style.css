@@ -169,6 +169,11 @@
 .preview table tbody > tr:nth-child(even) {
   background-color: rgba(181, 181, 181, 0.1);
 }
+.preview hr {
+  height: 1px;
+  border: none;
+  border-top: 1px solid lightgray;
+}
 .editor-container {
   width: 100%;
   height: 100%;
@@ -217,12 +222,12 @@
 }
 .editor-container .ReactCodeMirror {
   height: 100%;
-  padding-top: 48px;
   border: thin solid lightgray;
   transition: padding-top 0.5s;
 }
 .editor-container .CodeMirror {
   height: 100%;
+  padding-top: 48px;
 }
 .editor-container .CodeMirror .CodeMirror-line {
   padding: 2px 20px;
