@@ -26,37 +26,31 @@ import 'react-markdown-preview-editor/lib/css/style.css';
 ```
 ## 3. Options
 ### height
-Type: `string` Default: `300px`
-
+Type: `string` Default: `300px`  
 Height of the whole editor, can be 'px' or '%'
 
 ### defaultValue
-Type: `string`
-
+Type: `string`  
 Initial value of editor and preview
 
 ### showEditor
-Type: `boolean` Default: `true`
-
+Type: `boolean` Default: `true`  
 Show editor or not
 
 ### showEditorNav
-Type: `boolean` Default: `true`
-
+Type: `boolean` Default: `true`  
 Show editor nav or not
 
 ### showPreview
-Type: `boolean` Default: `true`
-
+Type: `boolean` Default: `true`  
 Show preview or not
 
 ### showOrder
-Type: `boolean` Default: `true`
-
+Type: `boolean` Default: `true`  
 Change order of editor and preview 
-### registMarkBtns
-Type: `object` 
 
+### registMarkBtns
+Type: `object`  
 Regist custom markdown buttons for `markBtns` option.
 
 ```
