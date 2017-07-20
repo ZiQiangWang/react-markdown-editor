@@ -1,4 +1,4 @@
-# react-markdown
+# react-markdown-editor
 A markdown editor component for react based on marked, you can edit and preview at same time.
 
 ## 1. Installation 
@@ -27,27 +27,39 @@ import 'react-markdown-preview-editor/lib/css/style.css';
 ## 3. Options
 ### height
 Type: `string` Default: `300px`
+
 Height of the whole editor, can be 'px' or '%'
+
 ### defaultValue
 Type: `string`
+
 Initial value of editor and preview
+
 ### showEditor
 Type: `boolean` Default: `true`
+
 Show editor or not
+
 ### showEditorNav
 Type: `boolean` Default: `true`
+
 Show editor nav or not
+
 ### showPreview
 Type: `boolean` Default: `true`
+
 Show preview or not
+
 ### showOrder
 Type: `boolean` Default: `true`
+
 Change order of editor and preview 
 ### registMarkBtns
 Type: `object` 
+
 Regist custom markdown buttons for `markBtns` option.
 
-```json
+```
  {
    heading: {
          mark: '# ',
@@ -66,12 +78,19 @@ Regist custom markdown buttons for `markBtns` option.
 }
 ```
 **heading:** name of the button.
+
 **mark:** markdown sign, string for insert or array for around.
+
 **type:** define the way markdown insert in, `insert` and `around` can be used.`insert` is insert mark at cursor, `around` is add mark  on both sides of selected part.
+
 **icon:** the button icon, is a class add to span, icomoon and font awesome are avalible.
+
 **iconTheme:** define the appearance of button, such as color, hover .
+
 **tips:** tips when mouse hover.
+
 **text:** define text after icon.
+
 ### markBtns
 Type: `array`
 Default buttons: 
@@ -108,12 +127,18 @@ You can also add buttons registed. For example, new button `code` is registed, y
 Type: `object` 
 Default:
 > gfm: true,
-tables: true,
-breaks: true,
-pedantic: false,
-sanitize: false,
-smartLists: true,
-smartypants: false
+
+> tables: true,
+
+>breaks: true,
+
+>pedantic: false,
+
+>sanitize: false,
+
+>smartLists: true,
+
+>smartypants: false
 
 You can click [Here](https://github.com/chjj/marked/blob/master/README.md#options-1) to get detail infomation.
 ### codemirrorOptions
@@ -131,3 +156,6 @@ The code color of preview can be setted.Just import highlight style file what yo
 ```js
 import '/highlight.js/style/gitbub.css';
 ```
+
+## License
+See LICENSE for more info.
