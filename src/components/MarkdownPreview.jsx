@@ -87,7 +87,6 @@ class MarkdownPreview extends Component {
 }
 
 const defaultOptions = {
-  breaks: true, 
   lineNumber: true
 }
 
