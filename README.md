@@ -60,16 +60,23 @@ Default buttons:
 * line
 * picture
 
+You can also add buttons registed.
 ### registMarkBtns
 Type: `object` 
-Add custom markdown buttons, 
-> heading: {
-          mark: '# ',
-          type: 'insert',
-          icon: 'icon-font-size',
-          iconTheme: 'color',
-          tips: 'heading',
-          text: 'test'
-},
+Regist custom markdown buttons for `markBtns` option.
+
+```json
+ {
+   heading: {
+         mark: '# ',
+         type: 'insert',
+         icon: 'icon-font-size',
+         iconTheme: 'color',
+         tips: 'heading',
+         text: 'test'
+     }
+}
+```
+`heading` is name of the button, mark
 
 
