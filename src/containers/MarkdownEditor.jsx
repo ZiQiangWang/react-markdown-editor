@@ -58,6 +58,8 @@ class MarkdownEditor extends React.Component {
         this.preview.scrollTop = previewPos.offsetTop-10;
       }
     }
+
+    beforeScrollTop = this.preview.scrollTop;
   }
 
   onPreviewScroll = (e) => {
@@ -67,12 +69,12 @@ class MarkdownEditor extends React.Component {
 
       let line = 0;
       for(let ele of lineNumbers) {
-        if (this.preview.scrollTop >= ele.offsetTop) {
+        if (this.preview.scrollTop > ele.offsetTop) {
           line = ele.getAttribute('line-number');
         }
       }
-
-      const height = this.editor.heightAtLine(parseInt(line),'local');
+      console.log(line);
+      const height = this.editor.heightAtLine(parseInt(line-1),'local');
       this.editor.scrollTo(null,height);
     }
   }
@@ -80,15 +82,15 @@ class MarkdownEditor extends React.Component {
   render() {
     const {
       height, 
+      defaultValue,
       showEditor, 
       showEditorNav, 
       showPreview, 
       showOrder,
-      markedOptions, 
-      codemirrorOptions,
       markBtns,
       registMarkBtns,
-      defaultValue 
+      markedOptions, 
+      codemirrorOptions,
     } = this.props;
 
     return (
