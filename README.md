@@ -120,19 +120,13 @@ You can also add buttons registed. For example, new button `code` is registed, y
 ### markedOptions
 Type: `object` 
 Default:
-> gfm: true,
-
-> tables: true,
-
->breaks: true,
-
->pedantic: false,
-
->sanitize: false,
-
->smartLists: true,
-
->smartypants: false
+> gfm: true,  
+tables: true,  
+breaks: true,  
+pedantic: false,  
+sanitize: false,  
+smartLists: true,  
+smartypants: false
 
 You can click [Here](https://github.com/chjj/marked/blob/master/README.md#options-1) to get detail infomation.
 ### codemirrorOptions
