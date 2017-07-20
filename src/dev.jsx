@@ -13,6 +13,6 @@ import MarkdownEditor from './containers/MarkdownEditor';
 import './style/index.less';
 
 render(
-  <MarkdownEditor />, 
+  <MarkdownEditor defaultValue="# Hello"/>, 
   document.getElementById('root')
 );

@@ -200,8 +200,6 @@
   z-index: 50;
   line-height: 48px;
   overflow: hidden;
-  background-color: #444;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   transition: height .5s;
 }
 .editor-container .markdown-bar .inner-bar {
@@ -220,11 +218,11 @@
 .editor-container .ReactCodeMirror {
   height: 100%;
   padding-top: 48px;
+  border: thin solid lightgray;
   transition: padding-top 0.5s;
 }
 .editor-container .CodeMirror {
   height: 100%;
-  border: thin solid lightgray;
 }
 .editor-container .CodeMirror .CodeMirror-line {
   padding: 2px 20px;
@@ -256,7 +254,7 @@
   color: #bbbbbb;
 }
 .default:hover {
-  color: #eeeeee;
+  color: #3b3b3b;
 }
 .bluegray {
   color: rgba(102, 128, 153, 0.45);

@@ -71,7 +71,6 @@ class MarkdownEditor extends React.Component {
           line = ele.getAttribute('line-number');
         }
       }
-      console.log(line);
       const height = this.editor.heightAtLine(parseInt(line-1),'local');
       this.editor.scrollTo(null,height);
     }
