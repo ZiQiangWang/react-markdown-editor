@@ -58,8 +58,6 @@ class MarkdownEditor extends React.Component {
         this.preview.scrollTop = previewPos.offsetTop-10;
       }
     }
-
-    beforeScrollTop = this.preview.scrollTop;
   }
 
   onPreviewScroll = (e) => {

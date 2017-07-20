@@ -149,8 +149,11 @@
 .preview pre > ol > li {
   padding-left: 10px;
 }
-.preview code {
+.preview pre > ol > li code {
   background-color: rgba(255, 255, 255, 0.1);
+}
+.preview code {
+  background-color: rgba(102, 128, 153, 0.05);
 }
 .preview table {
   margin: 1em 0;
