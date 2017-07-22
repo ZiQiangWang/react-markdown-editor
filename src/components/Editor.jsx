@@ -183,11 +183,13 @@ class Editor extends Component {
 
   render() {
 
-    const {show,showNav,markBtns,registMarkBtns,options,onMouseEnter, ...mirrorProps} = this.props;
+    const {show,showNav,width,height,markBtns,registMarkBtns,options,onMouseEnter, ...mirrorProps} = this.props;
     const mirrorOptions = {...options, ...defaultOptions};
 
     return (
-      <div className={"editor-container " + (show ? "":"disappear")} onMouseEnter={onMouseEnter}>
+      <div className={"editor-container " + (show ? "":"disappear")} 
+            onMouseEnter={onMouseEnter}
+            style={{width:width, height:height}}>
         <div className="markdown-bar" style={{height: showNav ? "48px" : "0"}}>
           <div className="inner-bar">
             { this.markdownBtns.map((ele,index) => {
@@ -215,7 +217,8 @@ const defaultOptions = {
 Editor.defaultProps = {
   show: true,
   showNav: true,
-  height: '300px'
+  height: "100%",
+  width: "100%"
 }
 
 Editor.propTypes = {

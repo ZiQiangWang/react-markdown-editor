@@ -79,6 +79,7 @@ class MarkdownEditor extends React.Component {
   render() {
     const {
       height, 
+      width,
       defaultValue,
       showEditor, 
       showEditorNav, 
@@ -121,6 +122,7 @@ class MarkdownEditor extends React.Component {
 
 MarkdownEditor.defaultProps = {
   height: '400px',
+  width: '100%',
   showEditor: true,
   showEditorNav: true,
   showPreview: true,

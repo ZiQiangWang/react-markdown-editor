@@ -5,4 +5,4 @@ import Editor from './components/Editor';
 
 import MarkdownPreview from './components/MarkdownPreview';
 
-export { MarkdownEditor, Editor, MarkdownPreview}
+export { MarkdownEditor, Editor, MarkdownPreview }

@@ -70,7 +70,7 @@ class MarkdownPreview extends Component {
 
   render() {
 
-    const {show,source,options, ...others} = this.props;
+    const {show,source,options,width,height, ...others} = this.props;
 
     const html = marked(source, {renderer: this.markRender});
   
@@ -78,6 +78,7 @@ class MarkdownPreview extends Component {
       <div 
         ref="preview"
         className={"preview " + (show ? "":"disappear")}
+        style={{width:width, height:height}}
         dangerouslySetInnerHTML={{ __html: html}}
         {...others}
       >
@@ -92,7 +93,9 @@ const defaultOptions = {
 
 MarkdownPreview.defaultProps = {
   show: true,
-  source: ""
+  source: "",
+  width: "100%",
+  height: "100%"
 }
 
 MarkdownPreview.propTypes = {
