@@ -16,7 +16,7 @@ class MarkdownEditor extends React.Component {
     super(props);
 
     this.state = {
-      markdownSrc: this.props.defaultValue ? this.props.defaultValue : "",
+      markdownSrc: "",
     };
 
     this.owner = 'editor';
@@ -24,19 +24,15 @@ class MarkdownEditor extends React.Component {
     this.editorLine = 0;
   }
 
-  getMarkdownSrc = ()=> {
-    return this.state.markdownSrc;
-  }
-
   componentDidMount() {
     this.editor = this.refs.editor.editorInstance();
     this.preview = this.refs.preview.previewInstance();
   }
 
-  onMarkdownChange = (md) =>  {
+  onMarkdownChange = (cm) =>  {
     this.setState({
       ...this.state,
-      markdownSrc: md
+      markdownSrc: cm.getValue()
     });
   }
 
@@ -80,7 +76,7 @@ class MarkdownEditor extends React.Component {
     const {
       height, 
       width,
-      defaultValue,
+      value,
       showEditor, 
       showEditorNav, 
       showPreview, 
@@ -101,8 +97,7 @@ class MarkdownEditor extends React.Component {
           options={codemirrorOptions}
           markBtns={this.props.markBtns}
           registMarkBtns={this.props.registMarkBtns}
-          defaultValue={defaultValue}
-          value={this.state.markdownSrc}
+          value={value}
           onChange={this.onMarkdownChange}
           onMouseEnter={this.editorOwner}
           onScroll={this.onEditorScroll}

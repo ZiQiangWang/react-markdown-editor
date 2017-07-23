@@ -8,7 +8,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CodeMirror from 'react-codemirror';
+import ReactCodeMirror from './ReactCodeMirror';
 import 'codemirror/mode/markdown/markdown';
 import 'codemirror/lib/codemirror.css';
 import IconBtn from './IconBtn';
@@ -183,7 +183,7 @@ class Editor extends Component {
 
   render() {
 
-    const {show,showNav,width,height,markBtns,registMarkBtns,options,onMouseEnter, ...mirrorProps} = this.props;
+    const {show,showNav,width,height,markBtns,registMarkBtns,options,onMouseEnter, ...mirrorEvent} = this.props;
     const mirrorOptions = {...options, ...defaultOptions};
 
     return (
@@ -197,11 +197,11 @@ class Editor extends Component {
             }) }
           </div>
         </div>
-        <CodeMirror 
+        <ReactCodeMirror 
           ref="mirror"
           className={showNav ? "": "show-nav"}
           options={mirrorOptions}
-          {...mirrorProps} 
+          {...mirrorEvent} 
         />
       </div>
     );

@@ -13,6 +13,7 @@ import MarkdownEditor from './containers/MarkdownEditor';
 import './style/index.less';
 
 render(
-  <MarkdownPreview height="500px" width="50%"/>, 
+  <MarkdownEditor value="# testst" 
+  codemirrorOptions={{tabSize:12}} />, 
   document.getElementById('root')
 );
