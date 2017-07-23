@@ -32939,6 +32939,7 @@ var MarkdownEditor = function (_React$Component) {
       _this.setState(_extends({}, _this.state, {
         markdownSrc: cm.getValue()
       }));
+      _this.props.onArticleChange(cm.getValue());
     };
 
     _this.previewOwner = function () {
@@ -33074,7 +33075,7 @@ MarkdownEditor.defaultProps = {
 };
 
 MarkdownEditor.propTypes = {
-  defaultValue: _propTypes2.default.string,
+  value: _propTypes2.default.string,
   height: _propTypes2.default.string,
   showEditor: _propTypes2.default.bool,
   showEditorNav: _propTypes2.default.bool,

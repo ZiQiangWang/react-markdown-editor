@@ -5,15 +5,26 @@
  */
 
 
-import React from 'react';
+import React, {Component} from 'react';
 import {render} from 'react-dom';
 import MarkdownPreview from './components/MarkdownPreview';
 import Editor from './components/Editor';
 import MarkdownEditor from './containers/MarkdownEditor';
 import './style/index.less';
 
+
+class Test extends Component {
+
+  handleArticleChange = (text) => {
+    console.log(text);
+  }
+
+
+  render() {
+    return <MarkdownEditor onArticleChange={this.handleArticleChange}/>
+  }
+}
 render(
-  <MarkdownEditor value="# testst" 
-  codemirrorOptions={{tabSize:12}} />, 
+  <Test />, 
   document.getElementById('root')
 );

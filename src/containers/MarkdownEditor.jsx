@@ -34,6 +34,7 @@ class MarkdownEditor extends React.Component {
       ...this.state,
       markdownSrc: cm.getValue()
     });
+    this.props.onArticleChange(cm.getValue());
   }
 
   previewOwner = () => {
@@ -125,7 +126,7 @@ MarkdownEditor.defaultProps = {
 }
 
 MarkdownEditor.propTypes = {
-  defaultValue: PropTypes.string,
+  value: PropTypes.string,
   height: PropTypes.string,
   showEditor: PropTypes.bool,
   showEditorNav: PropTypes.bool,
