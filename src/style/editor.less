@@ -11,11 +11,15 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-
+  border: @borderColor;
   // 响应式变化
   @media screen and (max-width: 960px){
 
     flex-direction: column !important;
+  }
+
+  .split {
+    border-left: @borderColor;
   }
 }
 
@@ -29,7 +33,6 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding: 10px 20px 10px 20px;
-  border: @borderColor;
   
   // 设置编辑器的字体
   .editor-font;
@@ -122,7 +125,6 @@
   }
   .ReactCodeMirror {
     height: 100%;
-    border: @borderColor;
     transition: padding-top .5s;
   }
   .CodeMirror {

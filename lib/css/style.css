@@ -86,6 +86,7 @@
   width: 100%;
   overflow: hidden;
   position: relative;
+  border: thin solid lightgray;
 }
 @media screen and (max-width: 960px) {
   .markdown-editor {
@@ -94,6 +95,9 @@
             flex-direction: column !important;
   }
 }
+.markdown-editor .split {
+  border-left: thin solid lightgray;
+}
 .disappear {
   display: none;
 }
@@ -101,7 +105,6 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding: 10px 20px 10px 20px;
-  border: thin solid lightgray;
   font-size: 16px;
   box-sizing: border-box;
 }
@@ -219,7 +222,6 @@
 }
 .editor-container .ReactCodeMirror {
   height: 100%;
-  border: thin solid lightgray;
   transition: padding-top 0.5s;
 }
 .editor-container .CodeMirror {

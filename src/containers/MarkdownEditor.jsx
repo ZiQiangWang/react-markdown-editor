@@ -103,6 +103,7 @@ class MarkdownEditor extends React.Component {
           onMouseEnter={this.editorOwner}
           onScroll={this.onEditorScroll}
         />
+        <span className="split"></span>
         <MarkdownPreview
           ref="preview"
           show={showPreview}
