@@ -219,15 +219,15 @@
   flex-wrap: wrap;
 }
 .editor-container .show-nav {
-  padding-top: 0 !important;
+  padding-top: 20px !important;
 }
 .editor-container .ReactCodeMirror {
   height: 100%;
+  padding-top: 48px;
   transition: padding-top 0.5s;
 }
 .editor-container .CodeMirror {
   height: 100%;
-  padding-top: 48px;
 }
 .editor-container .CodeMirror .CodeMirror-line {
   padding: 2px 20px;

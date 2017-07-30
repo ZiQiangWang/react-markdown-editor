@@ -66,7 +66,7 @@ class ReactCodeMirror extends Component {
 
   render() {
     return (
-      <div className="ReactCodeMirror">
+      <div className={"ReactCodeMirror " + this.props.className}>
         <textarea ref="textarea">
         </textarea>
       </div>
@@ -76,6 +76,7 @@ class ReactCodeMirror extends Component {
 
 ReactCodeMirror.propTypes = {
   value: PropTypes.string,
+  className: PropTypes.string,
   options: PropTypes.object
 }
 
