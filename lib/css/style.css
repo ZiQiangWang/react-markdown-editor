@@ -97,6 +97,7 @@
 }
 .markdown-editor .split {
   border-left: thin solid lightgray;
+  border-top: thin solid lightgray;
 }
 .disappear {
   display: none;
@@ -244,7 +245,6 @@
  * @version $Id$
  */
 .btn-icon {
-  color: white;
   cursor: pointer;
   width: auto;
   white-space: nowrap;
