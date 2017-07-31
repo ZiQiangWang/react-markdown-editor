@@ -23,7 +23,7 @@ class Editor extends Component {
     this.markdownBtns = [
       'heading','bold','italic','underline',
       'strikethrough','blockquote','code','list-ol',
-      'list-ul','link','table','line','picture'
+      'list-ul','link','table','line','image'
     ];
     
     this.markdownMap = {
@@ -31,86 +31,133 @@ class Editor extends Component {
         mark: '# ',
         type: 'insert',
         icon: 'icon-font-size',
-        tips: '标题'
+        tips: '标题 <h1> Alt+H',
+        keys: ['Alt','h']
       },
       bold: {
         mark: ['**','**'],
         type: 'around',
         icon: 'icon-bold',
-        tips: '粗体'
+        tips: '粗体 <strong> Ctrl+B',
+        keys: ['Control','b']
       },
       italic: {
         mark: ['*','*'],
         type: 'around',
         icon: 'icon-italic',
-        tips: '斜体'
+        tips: '斜体 <em> Ctrl+I',
+        keys: ['Control','i']
       },
       underline: {
         mark: ['<u>','</u>'],
         type: 'around',
         icon: 'icon-underline',
-        tips: '下划线'
+        tips: '下划线 <u> Ctrl+U',
+        keys: ['Control','u']
       },
       strikethrough: {
         mark: ['~~','~~'],
         type: 'around',
         icon: 'icon-strikethrough',
-        tips: '删除线'
+        tips: '删除线 <del> Alt+S',
+        keys: ['Alt','s']
       },
       blockquote: {
         mark: '> ',
         type: 'insert',
         icon: 'icon-quotes-left',
-        tips: '引用'
+        tips: '引用 <blockquote> Alt+Q',
+        keys: ['Alt','q']
       },
       code: {
         mark: ['```js\n','\n```'],
         type: 'around',
         icon: 'icon-embed2',
-        tips: '代码段'
+        tips: '代码段 <code> Alt+C',
+        keys: ['Alt','c']
       },
       'list-ol': {
         mark: '1. ',
         type: 'insert',
         icon: 'icon-list-numbered',
-        tips: '有序列表'
+        tips: '有序列表 <ol> Alt+O',
+        keys: ['Alt','o']
       },
       'list-ul': {
         mark: '* ',
         type: 'insert',
         icon: 'icon-list2',
-        tips: '无序列表'
+        tips: '无序列表 <ul> Alt+U',
+        keys: ['Alt','u']
       },
       link: {
         mark: ['[',']()'],
         type: 'around',
         icon: 'icon-link',
-        tips: '链接'
+        tips: '链接 <a> Alt+L',
+        keys: ['Alt','l']
       },
       table: {
         mark: '\ncolumn1 | column2 | column3  \n------- | ------- | -------  \ncolumn1 | column2 | column3  \ncolumn1 | column2 | column3  \ncolumn1 | column2 | column3 \n',
         type: 'insert',
         icon: 'icon-table2',
-        tips: '表格'
+        tips: '表格 <table> Alt+T',
+        keys: ['Alt','t']
       },
       line: {
         mark: '\n----\n',
         type: 'insert',
         icon: 'icon-minus',
-        tips: '分割线'
+        tips: '分割线 <hr> Ctrl+Alt+L',
+        keys: ['Control','Alt','l']
       },
-      picture: {
+      image: {
         mark: ['![',']()'],
         type: 'around',
         icon: 'icon-image',
-        tips: '图片'
+        tips: '图片 <img> Alt+I',
+        keys: ['Alt','i']
       }
     };
+
+    this.shortcutMap = {};
 
     this.registMarkdownBtn();
 
     this.selectedMarkdownBtns();
   }
+  componentDidMount = () => {
+    // 在加载完成时获取codemirror实例
+    this.codemirror = this.refs.mirror.getCodeMirror();
+
+    window.addEventListener('keydown',this.handleKeydown);
+  }
+
+  componentWillUnmount = () => {
+    window.removeEventListener('keydown',this.handleKeydown);
+  }
+
+  handleKeydown = (e) => {
+    
+    if ((e.ctrlKey || e.altKey || e.shiftKey) && (!['Control','Alt','Shift'].includes(e.key))) {
+      const keyArray = [];
+      if (e.ctrlKey) {
+        keyArray.push('Control');
+      }
+      if (e.altKey) {
+        keyArray.push('Alt');
+      }
+      if (e.shiftKey) {
+        keyArray.push('Shift');
+      }
+      keyArray.push(e.key);
+
+      const shortcut = keyArray.join('-');
+      const btn = this.shortcutMap[shortcut];
+      this.onQuickMarkdown(btn);
+    }
+  }
+
 
   // 选择显示哪些按钮
   selectedMarkdownBtns = () => {
@@ -133,12 +180,17 @@ class Editor extends Component {
     if (this.props.registMarkBtns) {
       Object.assign(this.markdownMap, this.props.registMarkBtns);
     }
+
+
+    const btns = Object.keys(this.markdownMap);
+    btns.forEach(item => {
+      const btnConfig = this.markdownMap[item];
+      if (btnConfig.keys) {
+        this.shortcutMap[btnConfig.keys.join('-')] = item;
+      }
+    });
   }
 
-  componentDidMount() {
-    // 在加载完成时获取codemirror实例
-    this.codemirror = this.refs.mirror.getCodeMirror();
-  }
 
   // 响应使用按钮插入markdown语法的需求，主要调用codemirror的函数进行
   onQuickMarkdown = (type) => {
