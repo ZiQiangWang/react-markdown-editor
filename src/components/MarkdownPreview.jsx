@@ -5,24 +5,28 @@
  * @date    2017-07-13 20:40:24
  */
 
-import React,{ Component } from 'react';
+import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
-import marked from '../3rd/marked';
 import hljs from 'highlight.js';
-class MarkdownPreview extends Component {
+import marked from '../3rd/marked';
 
+class MarkdownPreview extends Component {
   constructor(props) {
     super(props);
 
     marked.setOptions({
-      ...defaultOptions,
-      ...this.props.options
+      ...this.props.options,
+      lineNumber: true,
     });
 
     this.markRender = this.initRender();
 
     this.preview = undefined;
+  }
+
+  componentDidMount() {
+    this.preview = findDOMNode(this.refs.preview);
   }
 
   initRender = () => {
@@ -33,74 +37,64 @@ class MarkdownPreview extends Component {
       const validLang = !!(lang && hljs.getLanguage(lang));
       // 将代码分行
       const codeLines = code.split('\n');
-      
+
       let codeBlock = '<pre><ol>';
       // 考虑语言可用性
       if (validLang) {
         codeLines.forEach((ele) => {
-          codeBlock += `<li><code>${hljs.highlight(lang,ele).value}</code></li>`
+          codeBlock += `<li><code>${hljs.highlight(lang, ele).value}</code></li>`;
         });
       } else {
         codeLines.forEach((ele) => {
-          codeBlock += `<li><code>${ele}</code></li>`
+          codeBlock += `<li><code>${ele}</code></li>`;
         });
       }
       codeBlock += '</ol></pre>';
       return codeBlock;
-    }
+    };
 
-    renderer.heading = function (text, level) {
-      var escapedText = text.toLowerCase().replace(/[^\u4e00-\u9fa5\w]+/g, '-');
-    
+    renderer.heading = (text, level) => {
+      const escapedText = text.toLowerCase().replace(/[^\u4e00-\u9fa5\w]+/g, '-');
+
       return `<h${level} id="${escapedText}">${text}</h${level}>`;
-    }
+    };
 
     return renderer;
   }
 
-  componentDidMount() {
-    
-    this.preview = findDOMNode(this.refs.preview);
-
-  }
-
-  previewInstance = () => {
-    return this.preview;
-  }
+  previewInstance = () => this.preview
 
   render() {
+    const { show, source, options, width, height, ...others } = this.props;
 
-    const {show,source,options,width,height, ...others} = this.props;
-
-    const html = marked(source, {renderer: this.markRender});
-  
+    const html = marked(source, { renderer: this.markRender });
+    /* eslint-disable react/no-danger */
     return (
-      <div 
+      <div
         ref="preview"
-        className={"preview " + (show ? "":"disappear")}
-        style={{width:width, height:height}}
-        dangerouslySetInnerHTML={{ __html: html}}
+        className={`preview ${show ? '' : 'disappear'}`}
+        style={{ width, height }}
+        dangerouslySetInnerHTML={{ __html: html }}
         {...others}
-      >
-      </div>
+      />
     );
   }
 }
 
-const defaultOptions = {
-  lineNumber: true
-}
-
 MarkdownPreview.defaultProps = {
   show: true,
-  source: "",
-  width: "100%",
-  height: "100%"
-}
+  source: '',
+  width: '100%',
+  height: '100%',
+  options: {},
+};
 
 MarkdownPreview.propTypes = {
-  source: PropTypes.string.isRequired,
-  options: PropTypes.shape({ 
+  show: PropTypes.bool,
+  width: PropTypes.string,
+  height: PropTypes.string,
+  source: PropTypes.string,
+  options: PropTypes.shape({
     gfm: PropTypes.bool,
     tables: PropTypes.bool,
     breaks: PropTypes.bool,
@@ -108,8 +102,8 @@ MarkdownPreview.propTypes = {
     sanitize: PropTypes.bool,
     smartLists: PropTypes.bool,
     smartypants: PropTypes.bool,
-    lineNumbers: PropTypes.bool
-  })
+    lineNumbers: PropTypes.bool,
+  }),
 };
 
 export default MarkdownPreview;

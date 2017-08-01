@@ -5,7 +5,8 @@ module.exports = {
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "parser": "babel-eslint",
+    "extends": "airbnb",
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
@@ -14,12 +15,13 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "jsx-a11y"
     ],
     "rules": {
         "indent": [
             "error",
-            4
+            2
         ],
         "linebreak-style": [
             "error",
@@ -32,6 +34,12 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "react/forbid-prop-types": 0,
+        "react/no-string-refs": 0,
+        "jsx-a11y/href-no-hash": 0,
+        "jsx-a11y/no-static-element-interactions": 0,
+        "max-len": 0,
+        "react/no-array-index-key": 0
     }
 };
