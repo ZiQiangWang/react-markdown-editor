@@ -8,21 +8,18 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactCodeMirror from 'react-cmirror';
 import 'codemirror/mode/markdown/markdown';
-import 'codemirror/lib/codemirror.css';
-import ReactCodeMirror from './ReactCodemirror';
 import IconBtn from './IconBtn';
 
 class Editor extends Component {
   constructor(props) {
     super(props);
 
-    this.codemirror = undefined;
-
     this.markdownBtns = [
       'heading', 'bold', 'italic', 'underline',
-      'strikethrough', 'blockquote', 'code', 'list-ol',
-      'list-ul', 'link', 'table', 'line', 'image',
+      'strikethrough', 'blockquote', 'code', 'listol',
+      'listul', 'link', 'table', 'line', 'image',
     ];
 
     this.markdownMap = {
@@ -31,115 +28,135 @@ class Editor extends Component {
         type: 'insert',
         icon: 'icon-font-size',
         tips: '标题 <h1> Alt+H',
-        keys: ['Alt', 'h'],
+        keys: ['Alt', 'H'],
       },
       bold: {
         mark: ['**', '**'],
         type: 'around',
         icon: 'icon-bold',
         tips: '粗体 <strong> Ctrl+B',
-        keys: ['Control', 'b'],
+        keys: ['Ctrl', 'B'],
       },
       italic: {
         mark: ['*', '*'],
         type: 'around',
         icon: 'icon-italic',
         tips: '斜体 <em> Ctrl+I',
-        keys: ['Control', 'i'],
+        keys: ['Ctrl', 'I'],
       },
       underline: {
         mark: ['<u>', '</u>'],
         type: 'around',
         icon: 'icon-underline',
         tips: '下划线 <u> Ctrl+U',
-        keys: ['Control', 'u'],
+        keys: ['Ctrl', 'U'],
       },
       strikethrough: {
         mark: ['~~', '~~'],
         type: 'around',
         icon: 'icon-strikethrough',
         tips: '删除线 <del> Alt+S',
-        keys: ['Alt', 's'],
+        keys: ['Alt', 'S'],
       },
       blockquote: {
         mark: '> ',
         type: 'insert',
         icon: 'icon-quotes-left',
         tips: '引用 <blockquote> Alt+Q',
-        keys: ['Alt', 'q'],
+        keys: ['Alt', 'Q'],
       },
       code: {
         mark: ['```js\n', '\n```'],
         type: 'around',
         icon: 'icon-embed2',
         tips: '代码段 <code> Alt+C',
-        keys: ['Alt', 'c'],
+        keys: ['Alt', 'C'],
       },
-      'list-ol': {
+      'listol': {
         mark: '1. ',
         type: 'insert',
         icon: 'icon-list-numbered',
         tips: '有序列表 <ol> Alt+O',
-        keys: ['Alt', 'o'],
+        keys: ['Alt', 'O'],
       },
-      'list-ul': {
+      'listul': {
         mark: '* ',
         type: 'insert',
         icon: 'icon-list2',
         tips: '无序列表 <ul> Alt+U',
-        keys: ['Alt', 'u'],
+        keys: ['Alt', 'U'],
       },
       link: {
         mark: ['[', ']()'],
         type: 'around',
         icon: 'icon-link',
         tips: '链接 <a> Alt+L',
-        keys: ['Alt', 'l'],
+        keys: ['Alt', 'L'],
       },
       table: {
         mark: '\ncolumn1 | column2 | column3  \n------- | ------- | -------  \ncolumn1 | column2 | column3  \ncolumn1 | column2 | column3  \ncolumn1 | column2 | column3 \n',
         type: 'insert',
         icon: 'icon-table2',
         tips: '表格 <table> Alt+T',
-        keys: ['Alt', 't'],
+        keys: ['Alt', 'T'],
       },
       line: {
         mark: '\n----\n',
         type: 'insert',
         icon: 'icon-minus',
         tips: '分割线 <hr> Ctrl+Alt+L',
-        keys: ['Control', 'Alt', 'l'],
+        keys: ['Ctrl', 'Alt', 'L'],
       },
       image: {
         mark: ['![', ']()'],
         type: 'around',
         icon: 'icon-image',
-        tips: '图片 <img> Alt+I',
-        keys: ['Alt', 'i'],
+        tips: '图片 <img> Alt+I'
       },
     };
 
-    this.shortcutMap = {};
+    this.extraKeys = {};
 
     this.registMarkdownBtn();
 
     this.selectedMarkdownBtns();
   }
+
   componentDidMount = () => {
     // 在加载完成时获取codemirror实例
-    this.codemirror = this.refs.mirror.getCodeMirror();
+    this.codemirrorInstance = this.refs.mirror.codemirrorInstance;
+    this.codemirror = this.refs.mirror.codemirror;
+    
+    const mac = this.codemirror.keyMap.default == this.codemirror.keyMap.macDefault;
 
-    window.addEventListener('keydown', this.handleKeydown);
-  }
+    if (mac) {
+      Object.keys(this.markdownMap).forEach(type => {
+        const config = this.markdownMap[type];
+        if (config.keys !== undefined) {
+          const index = config.keys.findIndex(value => value === 'Ctrl');
+          if (index != -1) {
+            config.keys[index] = 'Cmd';
+          }
+        }
+      });
+    }
 
-  componentWillUnmount = () => {
-    window.removeEventListener('keydown', this.handleKeydown);
+    Object.keys(this.markdownMap).forEach(type => {
+      this.codemirror.commands[type] = (cm) => {
+        this.onQuickMarkdown(type);
+      }
+      const keys = this.markdownMap[type].keys;
+      if (keys != undefined) {
+        const runKey = keys.join('-');
+        this.extraKeys[runKey] = type;
+      }
+    });
   }
 
   // 响应使用按钮插入markdown语法的需求，主要调用codemirror的函数进行
   onQuickMarkdown = (type) => {
     // 获取codemirror实例
-    const mirror = this.codemirror;
+    const mirror = this.codemirrorInstance;
 
     const config = this.markdownMap[type];
 
@@ -177,15 +194,6 @@ class Editor extends Component {
     if (this.props.registMarkBtns) {
       Object.assign(this.markdownMap, this.props.registMarkBtns);
     }
-
-
-    const btns = Object.keys(this.markdownMap);
-    btns.forEach((item) => {
-      const btnConfig = this.markdownMap[item];
-      if (btnConfig.keys) {
-        this.shortcutMap[btnConfig.keys.join('-')] = item;
-      }
-    });
   }
 
   // 选择显示哪些按钮
@@ -203,29 +211,7 @@ class Editor extends Component {
     }
   }
 
-  handleKeydown = (e) => {
-    if ((e.ctrlKey || e.altKey || e.shiftKey) && (!['Control', 'Alt', 'Shift'].includes(e.key))) {
-      const keyArray = [];
-      if (e.ctrlKey) {
-        keyArray.push('Control');
-      }
-      if (e.altKey) {
-        keyArray.push('Alt');
-      }
-      if (e.shiftKey) {
-        keyArray.push('Shift');
-      }
-      keyArray.push(e.key);
-
-      const shortcut = keyArray.join('-');
-      const btn = this.shortcutMap[shortcut];
-      if (btn !== undefined) {
-        this.onQuickMarkdown(btn);
-      }
-    }
-  }
-
-  editorInstance = () => this.codemirror
+  editorInstance = () => this.codemirrorInstance
 
   render() {
     const { show, showNav, width, height, markBtns, registMarkBtns, options, onMouseEnter, ...mirrorEvent } = this.props;
@@ -234,8 +220,10 @@ class Editor extends Component {
       mode: 'markdown',
       autofocus: true,
       lineWrapping: true,
+      extraKeys: this.extraKeys
     };
 
+    console.log(mirrorOptions);
     return (
       <div
         className={`editor-container ${show ? '' : 'disappear'}`}
@@ -249,6 +237,11 @@ class Editor extends Component {
         </div>
         <ReactCodeMirror
           ref="mirror"
+          style={{
+              height: '100%',
+              paddingTop: '48px',
+              transition: 'padding-top .5s'
+          }}
           className={showNav ? '' : 'show-nav'}
           options={mirrorOptions}
           {...mirrorEvent}
