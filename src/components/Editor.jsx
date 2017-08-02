@@ -127,6 +127,7 @@ class Editor extends Component {
     this.codemirrorInstance = this.refs.mirror.codemirrorInstance;
     this.codemirror = this.refs.mirror.codemirror;
     
+    // 判断是否为mac系统，如果是，快捷键Ctrl转为Cmd
     const mac = this.codemirror.keyMap.default == this.codemirror.keyMap.macDefault;
 
     if (mac) {
@@ -141,6 +142,7 @@ class Editor extends Component {
       });
     }
 
+    // 将快捷键映射到对应方法
     Object.keys(this.markdownMap).forEach(type => {
       this.codemirror.commands[type] = (cm) => {
         this.onQuickMarkdown(type);
@@ -223,7 +225,6 @@ class Editor extends Component {
       extraKeys: this.extraKeys
     };
 
-    console.log(mirrorOptions);
     return (
       <div
         className={`editor-container ${show ? '' : 'disappear'}`}
