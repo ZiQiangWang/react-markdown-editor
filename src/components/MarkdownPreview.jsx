@@ -9,6 +9,7 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 import marked from '../3rd/marked';
 
 class MarkdownPreview extends Component {
@@ -18,6 +19,9 @@ class MarkdownPreview extends Component {
     marked.setOptions({
       ...this.props.options,
       lineNumber: true,
+      highlight(code) {
+        return hljs.highlightAuto(code).value;
+      },
     });
 
     this.markRender = this.initRender();
@@ -31,27 +35,6 @@ class MarkdownPreview extends Component {
 
   initRender = () => {
     const renderer = new marked.Renderer();
-    // 重写render，使代码部分高亮显示，并添加行号
-    renderer.code = (code, lang) => {
-      // 判断该语言是否能解析
-      const validLang = !!(lang && hljs.getLanguage(lang));
-      // 将代码分行
-      const codeLines = code.split('\n');
-
-      let codeBlock = '<pre><ol>';
-      // 考虑语言可用性
-      if (validLang) {
-        codeLines.forEach((ele) => {
-          codeBlock += `<li><code>${hljs.highlight(lang, ele).value}</code></li>`;
-        });
-      } else {
-        codeLines.forEach((ele) => {
-          codeBlock += `<li><code>${ele}</code></li>`;
-        });
-      }
-      codeBlock += '</ol></pre>';
-      return codeBlock;
-    };
 
     renderer.heading = (text, level) => {
       const escapedText = text.toLowerCase().replace(/[^\u4e00-\u9fa5\w]+/g, '-');

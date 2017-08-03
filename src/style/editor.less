@@ -55,20 +55,9 @@
   pre {
     line-height: 1.5em;
     background-color: rgba(102,128,153,.05);
-    box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1) inset, 45px 0 0 rgba(102, 128, 153, 0.05) inset, 0 1px 0 rgba(102, 128, 153, 0.05);
-    > ol {
-      margin-left: 5px;
-      > li {
-        padding-left: 10px;
-        code {
-          background-color: rgba(255, 255, 255, 0.1);
-        }
-      }
-    }
-  }
-
-  code {
-    background-color: rgba(102,128,153,.05);
+    overflow-x: auto;
+    padding: 10px 20px;
+    border-radius: 4px;
   }
 
   table {
@@ -89,6 +78,10 @@
     height:1px;
     border:none;
     border-top:1px solid lightgray;
+  }
+
+  img {
+    max-width: 100%;
   }
 }
 

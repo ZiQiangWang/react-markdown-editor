@@ -5,6 +5,7 @@
  * @date    2017-07-12 16:01:07
  */
 
+/* eslint-disable import/no-extraneous-dependencies */
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -72,14 +73,14 @@ class Editor extends Component {
         tips: '代码段 <code> Alt+C',
         keys: ['Alt', 'C'],
       },
-      'listol': {
+      listol: {
         mark: '1. ',
         type: 'insert',
         icon: 'icon-list-numbered',
         tips: '有序列表 <ol> Alt+O',
         keys: ['Alt', 'O'],
       },
-      'listul': {
+      listul: {
         mark: '* ',
         type: 'insert',
         icon: 'icon-list2',
@@ -111,7 +112,8 @@ class Editor extends Component {
         mark: ['![', ']()'],
         type: 'around',
         icon: 'icon-image',
-        tips: '图片 <img> Alt+I'
+        tips: '图片 <img> Alt+I',
+        keys: ['Alt', 'I'],
       },
     };
 
@@ -126,16 +128,16 @@ class Editor extends Component {
     // 在加载完成时获取codemirror实例
     this.codemirrorInstance = this.refs.mirror.codemirrorInstance;
     this.codemirror = this.refs.mirror.codemirror;
-    
+
     // 判断是否为mac系统，如果是，快捷键Ctrl转为Cmd
-    const mac = this.codemirror.keyMap.default == this.codemirror.keyMap.macDefault;
+    const mac = this.codemirror.keyMap.default === this.codemirror.keyMap.macDefault;
 
     if (mac) {
-      Object.keys(this.markdownMap).forEach(type => {
+      Object.keys(this.markdownMap).forEach((type) => {
         const config = this.markdownMap[type];
         if (config.keys !== undefined) {
           const index = config.keys.findIndex(value => value === 'Ctrl');
-          if (index != -1) {
+          if (index !== -1) {
             config.keys[index] = 'Cmd';
           }
         }
@@ -143,12 +145,13 @@ class Editor extends Component {
     }
 
     // 将快捷键映射到对应方法
-    Object.keys(this.markdownMap).forEach(type => {
+    Object.keys(this.markdownMap).forEach((type) => {
+      /* eslint-disable no-unused-vars */
       this.codemirror.commands[type] = (cm) => {
         this.onQuickMarkdown(type);
-      }
+      };
       const keys = this.markdownMap[type].keys;
-      if (keys != undefined) {
+      if (keys !== undefined) {
         const runKey = keys.join('-');
         this.extraKeys[runKey] = type;
       }
@@ -222,7 +225,7 @@ class Editor extends Component {
       mode: 'markdown',
       autofocus: true,
       lineWrapping: true,
-      extraKeys: this.extraKeys
+      extraKeys: this.extraKeys,
     };
 
     return (
@@ -239,9 +242,9 @@ class Editor extends Component {
         <ReactCodeMirror
           ref="mirror"
           style={{
-              height: '100%',
-              paddingTop: '48px',
-              transition: 'padding-top .5s'
+            height: '100%',
+            paddingTop: '48px',
+            transition: 'padding-top .5s',
           }}
           className={showNav ? '' : 'show-nav'}
           options={mirrorOptions}

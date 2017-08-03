@@ -1,11 +1,11 @@
 {
   "name": "react-mark-editor",
-  "version": "1.3.7",
+  "version": "1.3.8",
   "description": "A markdown editor based on marked",
   "main": "lib/index.js",
   "scripts": {
     "start": "webpack-dev-server --open",
-    "build": "rimraf lib && babel src --out-dir lib --ignore dev.jsx && lessc src/style/index.less lib/css/style.css && cp -r src/fonts lib/fonts",
+    "build": "npm run lint && rimraf lib && babel src --out-dir lib --ignore dev.jsx && lessc src/style/index.less lib/css/style.css && cp -r src/fonts lib/fonts",
     "test": "jest --coverage",
     "lint": "eslint --ext .jsx src/ --fix"
   },
