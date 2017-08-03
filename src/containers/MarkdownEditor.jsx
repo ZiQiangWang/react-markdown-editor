@@ -34,8 +34,10 @@ class MarkdownEditor extends Component {
       ...this.state,
       markdownSrc: cm.getValue(),
     });
-    if (change.origin !== 'setValue') {
-      this.props.onArticleChange(cm.getValue());
+    this.props.onArticleChange(cm.getValue());
+
+    if (change.origin === 'setValue') {
+      cm.clearHistory();
     }
   }
 
