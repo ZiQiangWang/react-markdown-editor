@@ -1,6 +1,6 @@
 {
   "name": "react-mark-editor",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "description": "A markdown editor based on marked",
   "main": "lib/index.js",
   "scripts": {
@@ -59,7 +59,7 @@
     "highlight.js": "^9.12.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
-    "react-cmirror": "^1.0.5",
+    "react-cmirror": "^1.0.7",
     "react-dom": "^15.6.1"
   }
 }

@@ -29,12 +29,14 @@ class MarkdownEditor extends Component {
   }
 
   /* eslint-disable no-unused-vars */
-  onMarkdownChange = (cm) => {
+  onMarkdownChange = (cm, change) => {
     this.setState({
       ...this.state,
       markdownSrc: cm.getValue(),
     });
-    this.props.onArticleChange(cm.getValue());
+    if (change.origin !== 'setValue') {
+      this.props.onArticleChange(cm.getValue());
+    }
   }
 
   /* eslint-disable no-unused-vars */
